@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="锁是计算机协调多个进程或线程并发访问某一资源的机制。而根据加锁的范围，可被分为全局锁、表级锁和行锁。他们都有什么作用呢？有让我们一探究竟吧！">
+<meta name="keywords" content="mysql,lock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-lock">
+<meta property="og:url" content="http://yoursite.com/2020/11/08/1/index.html">
+<meta property="og:site_name" content="Darr_en1&#39;s blogs">
+<meta property="og:description" content="锁是计算机协调多个进程或线程并发访问某一资源的机制。而根据加锁的范围，可被分为全局锁、表级锁和行锁。他们都有什么作用呢？有让我们一探究竟吧！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-14T12:42:21.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql-lock">
+<meta name="twitter:description" content="锁是计算机协调多个进程或线程并发访问某一资源的机制。而根据加锁的范围，可被分为全局锁、表级锁和行锁。他们都有什么作用呢？有让我们一探究竟吧！">
+
+<link rel="canonical" href="http://yoursite.com/2020/11/08/1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql-lock | Darr_en1's blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Darr_en1's blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Darr_en1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Darr_en1's blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql-lock
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-08 16:39:54" itemprop="dateCreated datePublished" datetime="2020-11-08T16:39:54+08:00">2020-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-14 20:42:21" itemprop="dateModified" datetime="2020-11-14T20:42:21+08:00">2020-11-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>锁是计算机协调多个进程或线程并发访问某一资源的机制。<br>而根据加锁的范围，可被分为全局锁、表级锁和行锁。他们都有什么作用呢？有让我们一探究竟吧！<a id="more"></a></p>
+<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><h3 id="FTWRL"><a href="#FTWRL" class="headerlink" title="FTWRL"></a>FTWRL</h3><p>全局锁将对整个数据库实例加锁，使得整个库处于只读状态，会阻塞DDL和部分DML(select不被阻塞)语句。<br>通过输入命令 Flush tables with read lock (FTWRL)让整个库处于只读状态。</p>
+<p>全局锁的典型使用场景是做全库逻辑备份。<br>但是在备份过程中整个库完全处于只读状态，因此会出现一些隐患：</p>
+<ul>
+<li>如果在主库上备份，那么在备份期间都不能执行更新，业务基本上就得停摆；</li>
+<li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的binlog，会导致主从延迟。</li>
+</ul>
+<p>如此大的隐患势必在大部分业务场景下是不能接受，那有没有更好的办法呢？</p>
+<h3 id="single-transaction-实现数据库备份"><a href="#single-transaction-实现数据库备份" class="headerlink" title="single-transaction 实现数据库备份"></a>single-transaction 实现数据库备份</h3><p>InnoDB利用了“所有数据都有多个版本”的这个特性，实现了“秒级创建快照”的能力。</p>
+<p>我们可以通过一致性视图实现数据库备份。当我们使用InnoDB时，倘若我们将事务隔离级别设置成可重复读。<br>事务在启动的时候基于整库进行”快照”。因此我们便可以对当前数据进行备份，并不影响其他事务操作。</p>
+<p>mysql官方自带的逻辑备份工具 mysqldump。</p>
+<p>当mysqldump使用参数–single-transaction的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。<br>但这又存在一个问题。它需要数据库存储引擎处于一致性读的事务隔离级别。倘若使用MYISAM，则不能使用该功能。</p>
+<h3 id="readonly-和-FTWRL"><a href="#readonly-和-FTWRL" class="headerlink" title="readonly 和 FTWRL"></a>readonly 和 FTWRL</h3><p>mysql可以设置<code>set global readonly=true</code>将数据库变成全库只读。但他两的适用范围却不一样：</p>
+<ul>
+<li>在有些系统中，readonly的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大。</li>
+<li>在异常处理机制上有差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库回到可以正常更新的状态。<br>而将整个库设置为readonly之后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写状态，风险较高。</li>
+</ul>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p>MySQL里面表级别的锁有两种：表锁和元数据锁（meta data lock，MDL)。</p>
+<h3 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h3><p>MyISAM存储引擎只支持表锁。</p>
+<p>表锁的语法是 lock tables … read/write。通过 unlock tables主动释放锁，也可以在客户端断开的时候自动释放。</p>
+<p>当一个线程获取到表级写锁后，只能由该线程对表进行读写操作，别的线程必须等待该线程释放锁以后才能操作</p>
+<p>当一个线程获取到表级读锁后，该线程只能读取数据不能修改数据，其它线程也只能加读锁，不能加写锁</p>
+<h3 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h3><p>MDL在MySQL 5.5版本中引入。MDL不需要显式使用，在访问一个表的时候会被自动加上。</p>
+<p><strong>当对一个表做增删改查操作的时候，加MDL读锁</strong>；</p>
+<p><strong>当要对表做结构变更操作的时候，加MDL写锁</strong>。</p>
+<p>读锁之间不互斥，因此你可以有多个线程同时对一张表增删改查。</p>
+<p>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</p>
+<p>申请MDL锁的操作会形成一个队列，队列中写锁获取优先级高于读锁。一旦出现写锁等待，不但当前操作会被阻塞，同时还会阻塞后续该表的所有操作。事务一旦申请到MDL锁后，直到事务执行完才会将锁释放。</p>
+<p><strong>如果A会话开启一个事务对t表进行了一次查询并没有提交，该操作会获取MDL读锁。然后B会话对t表字段进行更改，上一个事务没有提交MDL读锁没有被释放，因此B会话block。<br>但是之后所有要在表t上新申请MDL读锁的请求也会被B会话阻塞。</strong></p>
+<h4 id="如何安全地给小表加字段？"><a href="#如何安全地给小表加字段？" class="headerlink" title="如何安全地给小表加字段？"></a>如何安全地给小表加字段？</h4><p>首先我们要解决长事务，事务不提交，就会一直占着MDL锁。<br>在MySQL的information_schema 库的 innodb_trx 表中，你可以查到当前执行中的事务。<br>如果你要做DDL变更的表刚好有长事务在执行，要考虑先暂停DDL，或者kill掉这个长事务。<br>倘若要变更的表是一个热点表，虽然数据量不大，但是上面的请求很频繁，这时候kill可能未必管用，因为新的请求马上就来了。<br>比较理想的机制是，在alter table语句里面设定等待时间，如果在这个指定的等待时间里面能够拿到MDL写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。<br>之后开发人员或者DBA再通过重试命令重复这个过程。</p>
+<h4 id="Online-DDL"><a href="#Online-DDL" class="headerlink" title="Online DDL"></a>Online DDL</h4><p>mysql 5.6以前 在DDL执行期间其他DML不能并行，运维人员对表的结构更改会导致该表的业务停滞。<br>这在很多时候是不能容忍的，因此在mysql5.6 引入了Online DDL ,它使得在DDL执行期间其他DML可以并行。</p>
+<p>Online DDL下，当获取到MDL写锁会将其降级成MDL读锁，然后真正做DDL操作。因此在DDL操作的过程中，表处于读锁状态。<br>DML不被阻塞。DDL操作完成后会升级成MDL写锁然后释放MDL锁。</p>
+<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p>行锁是粒度最小的锁。在Innodb引擎中既支持行锁也支持表锁，但只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁。<br>行锁开销会增大，加锁速度慢，并会出现死锁。但因为锁粒度变小，发生锁冲突的概率低，处理并发的能力强。</p>
+<h3 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h3><p><strong>共享锁（S锁）</strong>: 也称读锁，允许其他事物再加S锁，不允许其他事物再加X锁</p>
+<p><strong>排他锁（X锁）</strong>: 也称写锁，不允许其他事务再加S锁或者X锁</p>
+<h3 id="加锁方式"><a href="#加锁方式" class="headerlink" title="加锁方式"></a>加锁方式</h3><h4 id="自动加锁"><a href="#自动加锁" class="headerlink" title="自动加锁"></a>自动加锁</h4><p>对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及数据集加排他锁；<br>对于普通SELECT语句，InnoDB不会加任何锁；</p>
+<h4 id="手动加锁"><a href="#手动加锁" class="headerlink" title="手动加锁"></a>手动加锁</h4><p>普通SELECT语句是不会加锁的，但是也可以手动加锁。</p>
+<p>共享锁：select…lock in share mode</p>
+<p>排他锁：select … for update</p>
+<p>明明普通SELECT查询数据，读写不冲突塞，为什么还要对其上锁呢？</p>
+<p>因为mysql读操作其实分为2种类型:<strong>快照读（snapshot read）</strong>及<strong>当前读（current read）</strong>。<br>前者基于Mysql mvcc实现,后者是对数据库当前数据块的读取。</p>
+<p>UPDATE、INSERT、DELETE 和 加锁的SELECT 都是当前读，而普通的SELECT则是快照读。</p>
+<h3 id="next-key-lock"><a href="#next-key-lock" class="headerlink" title="next-key lock"></a>next-key lock</h3><p>行锁只能锁住行，并不能锁住后面加入满足条件的行，这是幻读产生的原因。<br>如果能对一个范围进行加锁，保证这个范围内数据不变，就可以消除幻读的问题。<br><strong>间隙锁（Gap Lock）</strong> 则是Innodb在可重复读隔离级别下提供的一种锁定范围左闭右闭的区间锁。<br>Innodb通过行锁和间隙锁共同组成的（next-key lock）从而解决了幻读问题。</p>
+<p>可重复读隔离级别下加锁规则：</p>
+<ul>
+<li>加锁的基本单位是next-key lock（前开后闭区间）。</li>
+<li>查找过程中访问到的对象才会加锁。</li>
+<li>索引上的等值查询，给唯一索引加锁的时候，next-key lock退化为行锁。</li>
+<li>索引上的等值查询，向右遍历时且最后一个值不满足等值条件的时候，next-key lock退化为间隙锁。</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://www.jianshu.com/p/32904ee07e56" target="_blank" rel="noopener">间隙锁详解</a><br><a href="https://time.geekbang.org/column/intro/139" target="_blank" rel="noopener">MySQL实战45讲</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/lock/" rel="tag"># lock</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/05/1/" rel="prev" title="python collections 深入解析">
+      <i class="fa fa-chevron-left"></i> python collections 深入解析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局锁"><span class="nav-number">1.</span> <span class="nav-text">全局锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FTWRL"><span class="nav-number">1.1.</span> <span class="nav-text">FTWRL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#single-transaction-实现数据库备份"><span class="nav-number">1.2.</span> <span class="nav-text">single-transaction 实现数据库备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readonly-和-FTWRL"><span class="nav-number">1.3.</span> <span class="nav-text">readonly 和 FTWRL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表级锁"><span class="nav-number">2.</span> <span class="nav-text">表级锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁"><span class="nav-number">2.1.</span> <span class="nav-text">表锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MDL"><span class="nav-number">2.2.</span> <span class="nav-text">MDL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何安全地给小表加字段？"><span class="nav-number">2.2.1.</span> <span class="nav-text">如何安全地给小表加字段？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Online-DDL"><span class="nav-number">2.2.2.</span> <span class="nav-text">Online DDL</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行锁"><span class="nav-number">3.</span> <span class="nav-text">行锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#种类"><span class="nav-number">3.1.</span> <span class="nav-text">种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加锁方式"><span class="nav-number">3.2.</span> <span class="nav-text">加锁方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动加锁"><span class="nav-number">3.2.1.</span> <span class="nav-text">自动加锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手动加锁"><span class="nav-number">3.2.2.</span> <span class="nav-text">手动加锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next-key-lock"><span class="nav-number">3.3.</span> <span class="nav-text">next-key lock</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Darr_en1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Darr_en1</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

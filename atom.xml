@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Darr_en1&#39;s blogs</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-11-14T12:42:21.371Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Darr_en1</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql-lock</title>
+    <link href="http://yoursite.com/2020/11/08/1/"/>
+    <id>http://yoursite.com/2020/11/08/1/</id>
+    <published>2020-11-08T08:39:54.000Z</published>
+    <updated>2020-11-14T12:42:21.371Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;锁是计算机协调多个进程或线程并发访问某一资源的机制。&lt;br&gt;而根据加锁的范围，可被分为全局锁、表级锁和行锁。他们都有什么作用呢？有让我们一探究竟吧！
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python collections 深入解析</title>
+    <link href="http://yoursite.com/2020/09/05/1/"/>
+    <id>http://yoursite.com/2020/09/05/1/</id>
+    <published>2020-09-05T10:20:54.000Z</published>
+    <updated>2020-11-12T09:15:45.688Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;collections是Python内建的一个集合模块，提供了许多有用的集合类。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
+    
+      <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gevent魔法和test中的应用实践</title>
+    <link href="http://yoursite.com/2020/08/26/1/"/>
+    <id>http://yoursite.com/2020/08/26/1/</id>
+    <published>2020-08-26T06:38:59.000Z</published>
+    <updated>2020-11-12T09:15:45.691Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>condition源码解析</title>
+    <link href="http://yoursite.com/2020/07/20/1/"/>
+    <id>http://yoursite.com/2020/07/20/1/</id>
+    <published>2020-07-20T02:42:47.000Z</published>
+    <updated>2020-11-12T09:15:45.693Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Condition是一种多线程通信工具，表示多线程下参与数据竞争的线程的一种状态，主要负责多线程环境下对线程的挂起和唤醒工作
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="condition" scheme="http://yoursite.com/tags/condition/"/>
+    
+      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rlock源码解析</title>
+    <link href="http://yoursite.com/2020/07/07/1/"/>
+    <id>http://yoursite.com/2020/07/07/1/</id>
+    <published>2020-07-07T06:48:12.000Z</published>
+    <updated>2020-11-12T09:15:45.695Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;可重入锁RLock允许在&lt;strong&gt;同一线程&lt;/strong&gt;中被多次&lt;strong&gt;acquire&lt;/strong&gt;，我们将一一揭晓它的实现过程。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python中的多继承</title>
+    <link href="http://yoursite.com/2020/04/26/1/"/>
+    <id>http://yoursite.com/2020/04/26/1/</id>
+    <published>2020-04-26T10:04:08.000Z</published>
+    <updated>2020-11-12T09:15:45.697Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="mro" scheme="http://yoursite.com/tags/mro/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>redis引用之计数器</title>
+    <link href="http://yoursite.com/2020/04/03/1/"/>
+    <id>http://yoursite.com/2020/04/03/1/</id>
+    <published>2020-04-03T10:16:36.000Z</published>
+    <updated>2020-11-12T09:15:45.691Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis数据结构底层_String</title>
+    <link href="http://yoursite.com/2020/03/25/1/"/>
+    <id>http://yoursite.com/2020/03/25/1/</id>
+    <published>2020-03-25T10:35:26.000Z</published>
+    <updated>2020-11-12T09:15:45.693Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;String在Redis中是可变字节数组的形式存在,但它并不是C所提供的原始字符数组。Redis通过自建Simple dynamic string(SDS)实现。
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解python装饰器</title>
+    <link href="http://yoursite.com/2020/01/16/1/"/>
+    <id>http://yoursite.com/2020/01/16/1/</id>
+    <published>2020-01-16T08:22:49.000Z</published>
+    <updated>2020-11-12T09:15:45.691Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>annual_summary</title>
+    <link href="http://yoursite.com/2020/01/15/1/"/>
+    <id>http://yoursite.com/2020/01/15/1/</id>
+    <published>2020-01-15T02:30:44.000Z</published>
+    <updated>2020-11-12T09:15:45.688Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2019已悄然离去，回顾这一整年，思考良多。2019年也是正式步入社会的一年，在技术领域，在团队协作方面都有很多提升，话不多说，切入正题。
+    
+    </summary>
+    
+      <category term="summary" scheme="http://yoursite.com/categories/summary/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>middleware</title>
+    <link href="http://yoursite.com/2019/06/13/1/"/>
+    <id>http://yoursite.com/2019/06/13/1/</id>
+    <published>2019-06-13T03:08:41.000Z</published>
+    <updated>2020-11-12T09:15:45.692Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;middleware与Django的请求/响应生命周期挂钩，middleware中定义的钩子函数可以用于全局改变Django的输入或输出。&lt;/p&gt;
+&lt;p&gt;本文将从以下几点介绍Django的middleware：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么时候使用 middleware&lt;/li&gt;
+&lt;li&gt;middleware是怎么运作的&lt;/li&gt;
+&lt;li&gt;自定义 StackOverflowMiddleware
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sort</title>
+    <link href="http://yoursite.com/2019/05/08/1/"/>
+    <id>http://yoursite.com/2019/05/08/1/</id>
+    <published>2019-05-08T06:22:45.000Z</published>
+    <updated>2020-11-12T09:15:45.696Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;排序在编程中非常常见，python内置sort()和sorted()两中排序方式。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="sort" scheme="http://yoursite.com/tags/sort/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 中的下划线</title>
+    <link href="http://yoursite.com/2019/05/07/1/"/>
+    <id>http://yoursite.com/2019/05/07/1/</id>
+    <published>2019-05-07T03:30:08.000Z</published>
+    <updated>2020-11-12T09:15:45.695Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python 作为动态语言，不同于java通过关键字修饰变量作用域，Python中，解释器通过读取单下划线和双下划线来实现不同的含义。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>组合两个表</title>
+    <link href="http://yoursite.com/2019/04/10/1/"/>
+    <id>http://yoursite.com/2019/04/10/1/</id>
+    <published>2019-04-10T07:19:26.000Z</published>
+    <updated>2020-11-12T09:15:45.689Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过连接查询取得数据库字段
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+      <category term="join" scheme="http://yoursite.com/tags/join/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>decorator</title>
+    <link href="http://yoursite.com/2019/03/12/1/"/>
+    <id>http://yoursite.com/2019/03/12/1/</id>
+    <published>2019-03-12T12:33:10.000Z</published>
+    <updated>2020-11-12T09:15:45.695Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python中，函数可以像变量一样当作参数传递给另一个函数， 装饰器则沿用了这一特性，在不改变既有代码的前提下，增加功能。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>uWSGI_nginx_Django</title>
+    <link href="http://yoursite.com/2019/03/11/1/"/>
+    <id>http://yoursite.com/2019/03/11/1/</id>
+    <published>2019-03-11T10:34:09.000Z</published>
+    <updated>2020-11-12T09:15:45.692Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过uWSGI+nginx+Django搭建生产web服务
+    
+    </summary>
+    
+      <category term="django" scheme="http://yoursite.com/categories/django/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="django" scheme="http://yoursite.com/tags/django/"/>
+    
+      <category term="uWSGI" scheme="http://yoursite.com/tags/uWSGI/"/>
+    
+      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker基础</title>
+    <link href="http://yoursite.com/2019/03/05/docker-basis/"/>
+    <id>http://yoursite.com/2019/03/05/docker-basis/</id>
+    <published>2019-03-05T10:49:24.000Z</published>
+    <updated>2020-11-12T09:15:45.694Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;docker的出现为环境配置，项目部署提供了空前便捷。相较于虚拟机的臃肿，运行缓慢，docker既轻量有快捷，成本开销都更小
+    
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>__dict__</title>
+    <link href="http://yoursite.com/2019/02/24/dict/"/>
+    <id>http://yoursite.com/2019/02/24/dict/</id>
+    <published>2019-02-24T11:07:35.000Z</published>
+    <updated>2020-11-12T09:15:45.693Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Python下一切皆对象，每个对象都有多个属性(attribute)，Python对属性有一套统一的管理方案。&lt;strong&gt;dict&lt;/strong&gt;是用来存储对象属性的一个字典，其键为属性名，值为属性的值。
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>进程间通信</title>
+    <link href="http://yoursite.com/2019/02/24/1/"/>
+    <id>http://yoursite.com/2019/02/24/1/</id>
+    <published>2019-02-24T10:48:37.000Z</published>
+    <updated>2020-11-12T09:15:45.690Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;多进程之间是如何进行通信的呢？
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="process" scheme="http://yoursite.com/tags/process/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>详解redis install</title>
+    <link href="http://yoursite.com/2018/12/29/1/"/>
+    <id>http://yoursite.com/2018/12/29/1/</id>
+    <published>2018-12-29T08:14:47.000Z</published>
+    <updated>2020-11-12T09:15:45.695Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;redis作为使用内存存储的NoSQL,数据存储相较于memcached有更加丰富的数据结构支持。还附有发布订阅，主从复制等功能。让我们来尝试怎么安装它吧。
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+</feed>
