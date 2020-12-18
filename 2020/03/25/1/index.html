@@ -208,24 +208,39 @@
 
       
         <p>String在Redis中是可变字节数组的形式存在,但它并不是C所提供的原始字符数组。Redis通过自建Simple dynamic string(SDS)实现。<a id="more"></a></p>
-<h4 id="SDS"><a href="#SDS" class="headerlink" title="SDS"></a>SDS</h4><p>redis在内部存储string都是用sds的数据结构实现。结构源码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr&#123;  </span><br><span class="line">     //记录buf数组中已使用字节的数量,等于SDS保存字符串的长度  </span><br><span class="line">     int len;  </span><br><span class="line">     //记录buf数组中未使用字节的数量  </span><br><span class="line">     int free;  </span><br><span class="line">     //字节数组,用于保存字符串  </span><br><span class="line">     char buf[];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="sds"><a class="header-anchor" href="#sds">¶</a>SDS</h4>
+<p>redis在内部存储string都是用sds的数据结构实现。结构源码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr&#123;  </span><br><span class="line">     //记录buf数组中已使用字节的数量,等于SDS保存字符串的长度  </span><br><span class="line">     int len;  </span><br><span class="line">     //记录buf数组中未使用字节的数量  </span><br><span class="line">     int free;  </span><br><span class="line">     //字节数组,用于保存字符串  </span><br><span class="line">     char buf[];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>redis的数据存储过程中为了提高性能，内部做了很多优化。string 内部还被拆分成三中编码:</p>
 <ul>
-<li><p>int编码: 存储字符串长度小于20且能够转化为整数的字符串</p>
+<li>
+<p>int编码: 存储字符串长度小于20且能够转化为整数的字符串</p>
 </li>
-<li><p>embstr编码: 保存长度小于44字节的字符串(redis3.2版本之前是39字节，之后是44字节)</p>
+<li>
+<p>embstr编码: 保存长度小于44字节的字符串(redis3.2版本之前是39字节，之后是44字节)</p>
 </li>
-<li><p>raw编码: 保存长度大于44字节的字符串(redis3.2版本之前是39字节，之后是44字节)</p>
+<li>
+<p>raw编码: 保存长度大于44字节的字符串(redis3.2版本之前是39字节，之后是44字节)</p>
 </li>
 </ul>
-<p>embstr编码的结构图：<br><img src="/images/redis-string/1.png" alt="embstr编码的结构图"><br>raw编码的结构:<br><img src="/images/redis-string/2.png" alt="raw编码的结构"></p>
-<p>上面结构图可以看出embstr和raw都是由redisObject和sds组成的。<br>但是embstr的redisObject和sds是连续的,只需要使用malloc分配一次内存;<br>而raw需要为redisObject和sds分别分配内存，即需要分配两次内存。<br>因此数据量小的情况下，embstr显然更加效率。<br>但是当数据量变大,free不足,embstr因为是连续存储地址,需要对redisObject和sds重新分配,<br>而raw只需要sds分别分配内存。因此redis会将embstr转化成raw从而实现扩容。</p>
-<p>Redis会自动对编码进行转换来适应和优化数据的存储,对 int(加减除外) embstr 的修改(append,setrange…)，<br>redis会先将其转换成raw，然后才进行修改。所以embstr实际上是只读性质的。</p>
+<p>embstr编码的结构图：<br>
+<img src="/images/redis-string/1.png" alt="embstr编码的结构图"><br>
+raw编码的结构:<br>
+<img src="/images/redis-string/2.png" alt="raw编码的结构"></p>
+<p>上面结构图可以看出embstr和raw都是由redisObject和sds组成的。<br>
+但是embstr的redisObject和sds是连续的,只需要使用malloc分配一次内存;<br>
+而raw需要为redisObject和sds分别分配内存，即需要分配两次内存。<br>
+因此数据量小的情况下，embstr显然更加效率。<br>
+但是当数据量变大,free不足,embstr因为是连续存储地址,需要对redisObject和sds重新分配,<br>
+而raw只需要sds分别分配内存。因此redis会将embstr转化成raw从而实现扩容。</p>
+<p>Redis会自动对编码进行转换来适应和优化数据的存储,对 int(加减除外) embstr 的修改(append,setrange…)，<br>
+redis会先将其转换成raw，然后才进行修改。所以embstr实际上是只读性质的。</p>
 <p>扩容策略：</p>
 <pre><code>- string 容量 &lt; 1 M ,扩大一倍
 - string 容量 &gt; 1 M ,扩大 1 M
 - string 容量 MAX : 512M
-</code></pre><p>参考</p>
+</code></pre>
+<p>参考</p>
 <p><a href="https://redis.io/topics/internals-sds" target="_blank" rel="noopener">https://redis.io/topics/internals-sds</a></p>
 <p><a href="http://blog.itpub.net/69918724/viewspace-2647282/" target="_blank" rel="noopener">http://blog.itpub.net/69918724/viewspace-2647282/</a></p>
 <p><a href="https://database.51cto.com/art/201906/598234.htm" target="_blank" rel="noopener">https://database.51cto.com/art/201906/598234.htm</a></p>
@@ -314,7 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SDS"><span class="nav-number">1.</span> <span class="nav-text">SDS</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#sds"><span class="nav-number">1.</span> <span class="nav-text">¶SDS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -328,7 +343,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -339,7 +354,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

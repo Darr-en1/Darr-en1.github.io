@@ -28,13 +28,13 @@
 <meta property="og:site_name" content="Darr_en1&#39;s blogs">
 <meta property="og:description" content="可重入锁RLock允许在同一线程中被多次acquire，我们将一一揭晓它的实现过程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/rlock源码解析/1.png">
-<meta property="og:image" content="http://yoursite.com/images/rlock源码解析/2.png">
+<meta property="og:image" content="http://yoursite.com/images/rlock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/1.png">
+<meta property="og:image" content="http://yoursite.com/images/rlock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/2.png">
 <meta property="og:updated_time" content="2020-11-12T09:15:45.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rlock源码解析">
 <meta name="twitter:description" content="可重入锁RLock允许在同一线程中被多次acquire，我们将一一揭晓它的实现过程。">
-<meta name="twitter:image" content="http://yoursite.com/images/rlock源码解析/1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/rlock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/1.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/07/07/1/">
 
@@ -208,11 +208,13 @@
 
       
         <p>可重入锁RLock允许在<strong>同一线程</strong>中被多次<strong>acquire</strong>，我们将一一揭晓它的实现过程。<a id="more"></a></p>
-<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> _thread</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">_allocate_lock = _thread.allocate_lock</span><br><span class="line"></span><br><span class="line">Lock = _allocate_lock</span><br></pre></td></tr></table></figure>
+<h4 id="lock"><a class="header-anchor" href="#lock">¶</a>Lock</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> _thread</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">_allocate_lock = _thread.allocate_lock</span><br><span class="line"></span><br><span class="line">Lock = _allocate_lock</span><br></pre></td></tr></table></figure>
 <p>Lock只是简单的对底层库做了个代理。<strong>锁并不属于锁定它的线程;另一个线程可以解锁它</strong>。由C代码实现。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker1</span><span class="params">(lock)</span>:</span></span><br><span class="line">    lock.acquire()</span><br><span class="line">    print(<span class="string">"worker1 running"</span>)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    lock.release()</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker2</span><span class="params">(lock)</span>:</span></span><br><span class="line">    lock.release()</span><br><span class="line">    print(<span class="string">"worker2 running"</span>)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    lock.acquire()</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lock = threading.Lock()</span><br><span class="line">t = threading.Thread(target=worker1, args=(lock,))</span><br><span class="line">t1 = threading.Thread(target=worker2, args=(lock,))</span><br><span class="line">t.start()</span><br><span class="line">t1.start()</span><br></pre></td></tr></table></figure>
 <p>worker2可以释放worker1获得的锁，获得的锁也能被worker1释放</p>
-<h4 id="RLock"><a href="#RLock" class="headerlink" title="RLock"></a>RLock</h4><p>两个特性:</p>
+<h4 id="rlock"><a class="header-anchor" href="#rlock">¶</a>RLock</h4>
+<p>两个特性:</p>
 <ul>
 <li>可重入:持有锁的线程可以多次acquire,release</li>
 <li>线程独占:当前线程获取的锁其他线程不能释放</li>
@@ -221,11 +223,15 @@
 <p>在3.6.5版本中。默认采用的是C 语言实现的，即_CRLock。还有一个Python版本实现的，即_PyRLock（也就是类_RLock）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_RLock</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._block = _allocate_lock()</span><br><span class="line">        self._owner = <span class="keyword">None</span></span><br><span class="line">        self._count = <span class="number">0</span></span><br></pre></td></tr></table></figure>
 <p>通过查看Rlock 实例化可以得知，Rlock只是在Lock基础上另外维护了_owner,_count从而达到-可重入的效果；</p>
-<p>_block :内部互斥排他锁同Lock<br>_owner :记录RLock锁的持有者的线程id,判断锁的持有者和当前的线程是否一致<br>_count : 内部的计数器，用来记录锁被持有的次数，对于RLock的属主线程，每获取一次锁就+1，反之每释放一次锁就-1，当计数器为0时，就释放内部的锁，这样其他线程可以继续获取该内部锁，继而获取了这个Rlock</p>
+<p>_block :内部互斥排他锁同Lock<br>
+_owner :记录RLock锁的持有者的线程id,判断锁的持有者和当前的线程是否一致<br>
+_count : 内部的计数器，用来记录锁被持有的次数，对于RLock的属主线程，每获取一次锁就+1，反之每释放一次锁就-1，当计数器为0时，就释放内部的锁，这样其他线程可以继续获取该内部锁，继而获取了这个Rlock</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">acquire</span><span class="params">(self, blocking=True, timeout=<span class="number">-1</span>)</span>:</span></span><br><span class="line">        me = get_ident() </span><br><span class="line">        <span class="keyword">if</span> self._owner == me:   <span class="comment"># 如果当前线程的pid是RLock对象所在的线程，那么对计数器进行加一操作</span></span><br><span class="line">            self._count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="comment"># 不满足上述条件：</span></span><br><span class="line">        <span class="comment"># 1. 当前线程非RLock对象所在线程</span></span><br><span class="line">        <span class="comment"># 2. RLock对象还未持有锁，即 self.owner = None</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 对Lock上锁：</span></span><br><span class="line">        <span class="comment"># 当 blocking=True 时，当前线程被阻塞，直到持有锁的线程将锁释放后，rc = True</span></span><br><span class="line">        <span class="comment"># 当 blocking=False 时，可以非阻塞的获取。如果获取锁成功，rc = True；获取失败，rc = False</span></span><br><span class="line">        rc = self._block.acquire(blocking, timeout)</span><br><span class="line">        <span class="keyword">if</span> rc:</span><br><span class="line">            self._owner = me   </span><br><span class="line">            self._count = <span class="number">1</span>   </span><br><span class="line">        <span class="keyword">return</span> rc</span><br></pre></td></tr></table></figure>
-<p>acquire方法的流程图如下:<br><img src="/images/rlock源码解析/1.png" alt="acquire方法的流程图"></p>
+<p>acquire方法的流程图如下:<br>
+<img src="/images/rlock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/1.png" alt="acquire方法的流程图"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">release</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self._owner != get_ident():  <span class="comment"># 如果持有锁的线程非当前线程，则抛异常</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">"cannot release un-acquired lock"</span>)</span><br><span class="line">        self._count = count = self._count - <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> count:   <span class="comment"># 如果计数器减到0，那么释放RLock内部的锁，此时其他线程就可以获取到锁</span></span><br><span class="line">            self._owner = <span class="keyword">None</span>   </span><br><span class="line">            self._block.release()</span><br></pre></td></tr></table></figure>
-<p>release方法的流程图如下:<br><img src="/images/rlock源码解析/2.png" alt="release方法的流程图"></p>
+<p>release方法的流程图如下:<br>
+<img src="/images/rlock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/2.png" alt="release方法的流程图"></p>
 <p>参考：</p>
 <p><a href="https://blog.csdn.net/u010301542/article/details/80144643" target="_blank" rel="noopener">https://blog.csdn.net/u010301542/article/details/80144643</a></p>
 <p><a href="https://reishin.me/python-source-code-parse-with-rlock/" target="_blank" rel="noopener">https://reishin.me/python-source-code-parse-with-rlock/</a></p>
@@ -315,7 +321,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock"><span class="nav-number">1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RLock"><span class="nav-number">2.</span> <span class="nav-text">RLock</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lock"><span class="nav-number">1.</span> <span class="nav-text">¶Lock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rlock"><span class="nav-number">2.</span> <span class="nav-text">¶RLock</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -329,7 +335,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -340,7 +346,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

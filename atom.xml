@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-17T06:36:13.912Z</updated>
+  <updated>2020-12-18T09:40:52.390Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>InnoDB中一条update语句到底涉及到了哪些内容呢？</title>
+    <link href="http://yoursite.com/2020/12/17/1/"/>
+    <id>http://yoursite.com/2020/12/17/1/</id>
+    <published>2020-12-17T03:36:18.000Z</published>
+    <updated>2020-12-18T09:40:52.390Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;InnoDB在处理更新语句的时候，并不会将数据直接更新到数据库，大量的磁盘操作势必影响数据库的性能，InnoDB是怎么做的呢？InnoDB通过引入内存组件buffer pool从而避免频繁对磁盘做随机读写操作，并引入redo log(写入日志)的机制保证了数据不丢失。采用缓存必然存在缓存不足需要进行内存淘汰,InnoDB则采取一种类似lru的内存淘汰算法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
+      <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
+    
+      <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
+    
+      <category term="wal" scheme="http://yoursite.com/tags/wal/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql-lock</title>
@@ -73,7 +103,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
+      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;
+很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;
+接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
     
     </summary>
     
@@ -145,7 +177,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;br&gt;
+      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;/p&gt;
     
     </summary>
     
@@ -167,7 +199,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
+      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;
+如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;
+由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
     
     </summary>
     
@@ -207,7 +241,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
+      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;
+一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;
+但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
     
     </summary>
     
@@ -252,7 +288,8 @@
 &lt;ul&gt;
 &lt;li&gt;什么时候使用 middleware&lt;/li&gt;
 &lt;li&gt;middleware是怎么运作的&lt;/li&gt;
-&lt;li&gt;自定义 StackOverflowMiddleware
+&lt;li&gt;自定义 StackOverflowMiddleware&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -412,7 +449,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Python下一切皆对象，每个对象都有多个属性(attribute)，Python对属性有一套统一的管理方案。&lt;strong&gt;dict&lt;/strong&gt;是用来存储对象属性的一个字典，其键为属性名，值为属性的值。
+      &lt;p&gt;Python下一切皆对象，每个对象都有多个属性(attribute)，Python对属性有一套统一的管理方案。__dict__是用来存储对象属性的一个字典，其键为属性名，值为属性的值。
     
     </summary>
     
@@ -442,28 +479,6 @@
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="process" scheme="http://yoursite.com/tags/process/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>详解redis install</title>
-    <link href="http://yoursite.com/2018/12/29/1/"/>
-    <id>http://yoursite.com/2018/12/29/1/</id>
-    <published>2018-12-29T08:14:47.000Z</published>
-    <updated>2020-11-12T09:15:45.695Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;redis作为使用内存存储的NoSQL,数据存储相较于memcached有更加丰富的数据结构支持。还附有发布订阅，主从复制等功能。让我们来尝试怎么安装它吧。
-    
-    </summary>
-    
-      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
-    
-    
-      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
   </entry>
   
