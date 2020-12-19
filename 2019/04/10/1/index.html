@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="通过连接查询取得数据库字段">
@@ -174,6 +174,8 @@
     <span>0%</span>
   </div>
 
+  <a href="https://github.com/Darr-en1" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
 
     <main class="main">
       <div class="main-inner">
@@ -256,11 +258,11 @@
 </tr>
 <tr>
 <td>FirstName</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 <tr>
 <td>LastName</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 </tbody>
 </table>
@@ -269,13 +271,13 @@
 <thead>
 <tr>
 <th>列名</th>
-<th>类型 </th>
+<th>类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AddressId</td>
-<td>int（主） </td>
+<td>int（主）</td>
 </tr>
 <tr>
 <td>PersonId</td>
@@ -283,16 +285,17 @@
 </tr>
 <tr>
 <td>City</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 <tr>
 <td>State</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 </tbody>
 </table>
 <p><strong>题目</strong></p>
-<p>编写一个SQL查询，满足条件：无论person是否有地址信息，都需要基于上述两表提供<br>person的以下信息：</p>
+<p>编写一个SQL查询，满足条件：无论person是否有地址信息，都需要基于上述两表提供<br>
+person的以下信息：</p>
 <p>FirstName, LastName, City, State</p>
 <p><strong>本题目考察的知识点有两点，关联查询，on where区别</strong></p>
 <p>数据库在通过连接两张或多张表来返回记录时，都会生成一张中间的临时表，然后再将这张临时表返回给用户。</p>
@@ -301,7 +304,8 @@
 <p>1.on条件是在生成临时表时使用的条件，它不管on中的条件是否为真，都会返回左边表中的记录。</p>
 <p>2.where条件是在临时表生成好后，再对临时表进行过滤的条件。这时已经没有left join的含义（必须返回左边表的记录）了，条件不为真的就全部过滤掉。</p>
 <p>3.因为inner join取并集，因此on where 没区别</p>
-<p><strong>答案</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT p.FirstName, p.LastName, a.City, a.State </span><br><span class="line">FROM Person p LEFT JOIN Address a </span><br><span class="line">ON  p.PersonId = a.personId;</span><br></pre></td></tr></table></figure></p>
+<p><strong>答案</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT p.FirstName, p.LastName, a.City, a.State </span><br><span class="line">FROM Person p LEFT JOIN Address a </span><br><span class="line">ON  p.PersonId = a.personId;</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.cnblogs.com/toSeeMyDream/p/6843984.html" target="_blank" rel="noopener">on与where区别</a></p>
 
     </div>
@@ -456,7 +460,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Darr_en1</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         
