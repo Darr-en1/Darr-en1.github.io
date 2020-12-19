@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Condition是一种多线程通信工具，表示多线程下参与数据竞争的线程的一种状态，主要负责多线程环境下对线程的挂起和唤醒工作">
@@ -104,6 +104,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -118,16 +119,51 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -154,7 +190,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head_portrait.png">
       <meta itemprop="name" content="Darr_en1">
       <meta itemprop="description" content="">
     </span>
@@ -205,31 +241,21 @@
 
       
         <p>Condition是一种多线程通信工具，表示多线程下参与数据竞争的线程的一种状态，主要负责多线程环境下对线程的挂起和唤醒工作<a id="more"></a></p>
-<h3 id="实例化"><a class="header-anchor" href="#实例化">¶</a>实例化</h3>
-<p>实例Condition时可以指定一个lock，如果没有指定，默认创建RLock的实例。同时Condition拥有与RLock一样的上锁方法acquire()和解锁方法release()。<br>
-并初始化双端队列waiters，用于存放 wait的thread</p>
+<h3 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h3><p>实例Condition时可以指定一个lock，如果没有指定，默认创建RLock的实例。同时Condition拥有与RLock一样的上锁方法acquire()和解锁方法release()。<br>并初始化双端队列waiters，用于存放 wait的thread</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Condition</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lock=None)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> lock <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            lock = RLock()</span><br><span class="line">        self._lock = lock</span><br><span class="line">        <span class="comment"># Export the lock's acquire() and release() methods</span></span><br><span class="line">        self.acquire = lock.acquire</span><br><span class="line">        self.release = lock.release</span><br><span class="line">        <span class="comment"># 如果锁定义了_release_save()或_acquire_restore()，</span></span><br><span class="line">        <span class="comment"># 这些覆盖默认实现(只是调用Rlock的release()和acquire())。_is_owned同上()。        </span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._release_save = lock._release_save</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._acquire_restore = lock._acquire_restore</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._is_owned = lock._is_owned</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        self._waiters = _deque()</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>实现上下文语法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._lock.__enter__()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, *args)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._lock.__exit__(*args)</span><br></pre></td></tr></table></figure>
-<h3 id="初探notify和wait"><a class="header-anchor" href="#初探notify和wait">¶</a>初探notify和wait</h3>
-<p>条件锁的两个重要方法是notify()和wait()。notify()和wait()必须在条件锁上锁的状态下使用<br>
-notify()和wait()被调用，程序会先去调用self._is_owned()，判断当前线程号与条件锁中的self._ower是否一致，如果不一致，抛出异常RuntimeError。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_is_owned</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># 如果当前线程拥有锁，_lock.acquire(0)返回False</span></span><br><span class="line">    <span class="keyword">if</span> self._lock.acquire(<span class="number">0</span>):</span><br><span class="line">        self._lock.release()</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<p>wait()先回释放第一层Rlock,其他线程就可以获取锁执行，然后会生成一个Lock,写入waiter并将自己锁住，等待其他线程释放</p>
+<p>实现上下文语法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._lock.__enter__()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, *args)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._lock.__exit__(*args)</span><br></pre></td></tr></table></figure></p>
+<h3 id="初探notify和wait"><a href="#初探notify和wait" class="headerlink" title="初探notify和wait"></a>初探notify和wait</h3><p>条件锁的两个重要方法是notify()和wait()。notify()和wait()必须在条件锁上锁的状态下使用<br>notify()和wait()被调用，程序会先去调用self._is_owned()，判断当前线程号与条件锁中的self._ower是否一致，如果不一致，抛出异常RuntimeError。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_is_owned</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># 如果当前线程拥有锁，_lock.acquire(0)返回False</span></span><br><span class="line">    <span class="keyword">if</span> self._lock.acquire(<span class="number">0</span>):</span><br><span class="line">        self._lock.release()</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
+<p>wait()先回释放第一层Rlock,其他线程就可以获取锁执行，然后会生成一个Lock,写入waiter并将自己锁住，等待其他线程释放 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait</span><span class="params">(self, timeout=None)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self._is_owned():</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">"cannot wait on un-acquired lock"</span>)</span><br><span class="line">    <span class="comment"># 创建一个锁对象Lock，并获取它，然后把它放到waiting池，需要可以被其他线程释放</span></span><br><span class="line">    waiter = _allocate_lock()</span><br><span class="line">    waiter.acquire()</span><br><span class="line">    self._waiters.append(waiter)</span><br><span class="line">    <span class="comment"># 释放底层锁，并保存锁对象的内部状态</span></span><br><span class="line">    saved_state = self._release_save()</span><br><span class="line">    gotit = <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">try</span>:   </span><br><span class="line">        <span class="keyword">if</span> timeout <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="comment"># 如果timeout是None，那么再次以阻塞的方式获取锁对象</span></span><br><span class="line">            <span class="comment"># 当前线程已经获取了一次该锁，再次acquire()当前线程会阻塞，直到其他线程释放该锁</span></span><br><span class="line">            waiter.acquire()</span><br><span class="line">            gotit = <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 如果timeout不是None，那么重复下面的流程：</span></span><br><span class="line">                <span class="comment"># time &gt; 0 阻塞方式获取锁,timeout时间内block</span></span><br><span class="line">                <span class="comment"># time &lt;0 以非阻塞方式获取锁</span></span><br><span class="line">            <span class="keyword">if</span> timeout &gt; <span class="number">0</span>:</span><br><span class="line">                gotit = waiter.acquire(<span class="keyword">True</span>, timeout)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                gotit = waiter.acquire(<span class="keyword">False</span>)</span><br><span class="line">        <span class="keyword">return</span> gotit</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 重新上第一层锁</span></span><br><span class="line">        self._acquire_restore(saved_state)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> gotit:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># 如果因为超时，而不是被唤醒，退出的wait()，那么将锁从waiting池中移除</span></span><br><span class="line">                self._waiters.remove(waiter)</span><br><span class="line">            <span class="keyword">except</span> ValueError:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p>notify()是在一个双端队列中进行操作，这个队列在Condition中名为_waiters。默认情况下，notify只会释放一个锁（按先进先出原则）。<br>
-如果队列中没有锁，直接退出函数，不报任何异常。</p>
+<p>notify()是在一个双端队列中进行操作，这个队列在Condition中名为_waiters。默认情况下，notify只会释放一个锁（按先进先出原则）。<br>如果队列中没有锁，直接退出函数，不报任何异常。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">notify</span><span class="params">(self, n=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> self._is_owned():</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">"cannot notify on un-acquired lock"</span>)</span><br><span class="line">    all_waiters = self._waiters</span><br><span class="line">    waiters_to_notify = _deque(_islice(all_waiters, n))</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> waiters_to_notify:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> waiter <span class="keyword">in</span> waiters_to_notify:</span><br><span class="line">        waiter.release()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            all_waiters.remove(waiter)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <p>Condition中还有一个notify_all()方法，调用它会释放队列中全部的锁。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">notify_all</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.notify(len(self._waiters))</span><br><span class="line"></span><br><span class="line">notifyAll = notify_all</span><br></pre></td></tr></table></figure>
-<h3 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h3>
-<p>condition 非常重要，在Queue,Semaphore,ThreadExecutorPool都有应用。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>condition 非常重要，在Queue,Semaphore,ThreadExecutorPool都有应用。</p>
 <p>condition实现主要依靠两层锁：</p>
 <ul>
 <li>condition初始化时创建一把锁(外部锁)，使用时需要先对外部锁上锁</li>
-<li>每次调用wait时，会先生成一个lock锁(内部锁)，将内部锁放到算双端队列waiters中，<br>
-然后上锁，再将外部锁释放。并再次获取内部锁block,等待其他线程调用notify释放该内部锁，<br>
-然后该线程会去试图获取内部锁。</li>
+<li>每次调用wait时，会先生成一个lock锁(内部锁)，将内部锁放到算双端队列waiters中，<br> 然后上锁，再将外部锁释放。并再次获取内部锁block,等待其他线程调用notify释放该内部锁，<br> 然后该线程会去试图获取内部锁。</li>
 </ul>
 
     </div>
@@ -316,12 +342,13 @@ notify()和wait()被调用，程序会先去调用self._is_owned()，判断当�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化"><span class="nav-number">1.</span> <span class="nav-text">¶实例化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初探notify和wait"><span class="nav-number">2.</span> <span class="nav-text">¶初探notify和wait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">¶总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化"><span class="nav-number">1.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初探notify和wait"><span class="nav-number">2.</span> <span class="nav-text">初探notify和wait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Darr_en1" src="/images/head_portrait.png">
   <p class="site-author-name" itemprop="name">Darr_en1</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -336,16 +363,26 @@ notify()和wait()被调用，程序会先去调用self._is_owned()，判断当�
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
+          
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Darr-en1" title="GitHub → https://github.com/Darr-en1" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:darr_en1@126.com" title="E-Mail → mailto:darr_en1@126.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -374,7 +411,7 @@ notify()和wait()被调用，程序会先去调用self._is_owned()，判断当�
   </span>
   <span class="author" itemprop="copyrightHolder">Darr_en1</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
         
@@ -404,6 +441,8 @@ notify()和wait()被调用，程序会先去调用self._is_owned()，判断当�
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 

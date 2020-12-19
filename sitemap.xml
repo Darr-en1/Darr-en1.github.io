@@ -4,7 +4,7 @@
   <url>
     <loc>http://yoursite.com/2020/12/17/1/</loc>
     
-    <lastmod>2020-12-18T09:40:52.390Z</lastmod>
+    <lastmod>2020-12-18T09:47:40.087Z</lastmod>
     
   </url>
   
@@ -79,6 +79,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2018/11/27/firstBlog/</loc>
+    
+    <lastmod>2020-11-12T09:15:45.694Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/05/docker-basis/</loc>
     
     <lastmod>2020-11-12T09:15:45.694Z</lastmod>
@@ -87,13 +94,6 @@
   
   <url>
     <loc>http://yoursite.com/2018/11/28/hexo_advanced_configuration/</loc>
-    
-    <lastmod>2020-11-12T09:15:45.694Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/11/27/firstBlog/</loc>
     
     <lastmod>2020-11-12T09:15:45.694Z</lastmod>
     
