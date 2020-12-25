@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-18T09:47:40.087Z</updated>
+  <updated>2020-12-24T09:01:47.467Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>选点展示问题的分析与总结</title>
+    <link href="http://yoursite.com/2020/12/23/1/"/>
+    <id>http://yoursite.com/2020/12/23/1/</id>
+    <published>2020-12-23T03:38:44.000Z</published>
+    <updated>2020-12-24T09:01:47.467Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工作中难免会遇到一些问题，当遭遇问题时，该如何分析并得到解决方案，是对程序员应对问题的能力和对知识的掌握程度的一次考验。我在工作时也遇到了问题，因此我把它记录下来，也算是成长的履历。
+    
+    </summary>
+    
+      <category term="vue" scheme="http://yoursite.com/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
+    
+      <category term="回调" scheme="http://yoursite.com/tags/%E5%9B%9E%E8%B0%83/"/>
+    
+      <category term="异步" scheme="http://yoursite.com/tags/%E5%BC%82%E6%AD%A5/"/>
+    
+      <category term="canvas" scheme="http://yoursite.com/tags/canvas/"/>
+    
+      <category term="vuex" scheme="http://yoursite.com/tags/vuex/"/>
+    
+  </entry>
   
   <entry>
     <title>InnoDB中一条update语句到底涉及到了哪些内容呢？</title>
@@ -34,11 +62,11 @@
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
       <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -86,11 +114,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
-    
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   
@@ -450,28 +478,6 @@
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>进程间通信</title>
-    <link href="http://yoursite.com/2019/02/24/1/"/>
-    <id>http://yoursite.com/2019/02/24/1/</id>
-    <published>2019-02-24T10:48:37.000Z</published>
-    <updated>2020-11-12T09:15:45.690Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;多进程之间是如何进行通信的呢？
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="process" scheme="http://yoursite.com/tags/process/"/>
     
   </entry>
   
