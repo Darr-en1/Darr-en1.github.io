@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-24T09:01:47.467Z</updated>
+  <updated>2021-03-11T12:26:27.203Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>韭菜日记</title>
+    <link href="http://yoursite.com/2021/03/11/1/"/>
+    <id>http://yoursite.com/2021/03/11/1/</id>
+    <published>2021-03-11T10:48:05.000Z</published>
+    <updated>2021-03-11T12:26:27.203Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近的金融市场哀嚎遍野，作为一个2020年底才入市的小韭菜也可谓是被市场狠狠的上了一课。&lt;br&gt;但庆幸的是在投资初期就认识到股市的风险。让我对股市抱有敬畏，而不是一味贪婪，这对我之后的理财之路会带来很大的启发和帮助。
+    
+    </summary>
+    
+      <category term="理财" scheme="http://yoursite.com/categories/%E7%90%86%E8%B4%A2/"/>
+    
+    
+      <category term="理财" scheme="http://yoursite.com/tags/%E7%90%86%E8%B4%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>选点展示问题的分析与总结</title>
@@ -62,11 +82,11 @@
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
       <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
-    
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -114,11 +134,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   
@@ -458,26 +478,6 @@
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>__dict__</title>
-    <link href="http://yoursite.com/2019/02/24/dict/"/>
-    <id>http://yoursite.com/2019/02/24/dict/</id>
-    <published>2019-02-24T11:07:35.000Z</published>
-    <updated>2020-11-12T09:15:45.693Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Python下一切皆对象，每个对象都有多个属性(attribute)，Python对属性有一套统一的管理方案。&lt;strong&gt;dict&lt;/strong&gt;是用来存储对象属性的一个字典，其键为属性名，值为属性的值。
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
