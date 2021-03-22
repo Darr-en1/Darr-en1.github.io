@@ -82,11 +82,11 @@
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
       <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -134,11 +134,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
-    
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   

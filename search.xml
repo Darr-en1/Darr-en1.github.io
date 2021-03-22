@@ -35,9 +35,9 @@
       </categories>
       <tags>
         <tag>mysql</tag>
-        <tag>lru</tag>
         <tag>lock</tag>
         <tag>buffer pool</tag>
+        <tag>lru</tag>
         <tag>redo log</tag>
         <tag>wal</tag>
       </tags>
@@ -63,9 +63,9 @@
       </categories>
       <tags>
         <tag>python</tag>
+        <tag>lru</tag>
         <tag>collections</tag>
         <tag>linked list</tag>
-        <tag>lru</tag>
       </tags>
   </entry>
   <entry>
@@ -279,8 +279,8 @@
         <category>redis</category>
       </categories>
       <tags>
-        <tag>linux</tag>
         <tag>redis</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
