@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-11T12:26:27.203Z</updated>
+  <updated>2021-04-06T15:36:40.852Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自动化脚本生成错误结果文档</title>
+    <link href="http://yoursite.com/2021/04/06/1/"/>
+    <id>http://yoursite.com/2021/04/06/1/</id>
+    <published>2021-04-06T04:03:24.000Z</published>
+    <updated>2021-04-06T15:36:40.852Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;早期项目搭建的时候为了统一接口返回格式，基于werkzeug的HTTPException实现了APIException用于返回json格式，并制定了一套完善的错误码体系，但测试小伙伴对错误码对应的问题类型并不了解，因此需要编写一份文档用于方便查阅错误码和错误的原因。但是每次添加新的错误码都需要同步更新文档，这可不太妙。因此设计一个文档的同步更新机制迫在眉睫
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>韭菜日记</title>
@@ -84,9 +100,9 @@
     
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
-      <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
-    
       <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
+      <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -134,11 +150,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   
@@ -456,28 +472,6 @@
       <category term="uWSGI" scheme="http://yoursite.com/tags/uWSGI/"/>
     
       <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker基础</title>
-    <link href="http://yoursite.com/2019/03/05/docker-basis/"/>
-    <id>http://yoursite.com/2019/03/05/docker-basis/</id>
-    <published>2019-03-05T10:49:24.000Z</published>
-    <updated>2020-11-12T09:15:45.694Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;docker的出现为环境配置，项目部署提供了空前便捷。相较于虚拟机的臃肿，运行缓慢，docker既轻量有快捷，成本开销都更小
-    
-    </summary>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
   </entry>
   
