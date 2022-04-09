@@ -242,25 +242,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>排序在编程中非常常见，python内置sort()和sorted()两中排序方式。<a id="more"></a><br><!--more--></p>
-<h3 id="list-sort-sorted-区别"><a href="#list-sort-sorted-区别" class="headerlink" title="list.sort() sorted() 区别"></a>list.sort() sorted() 区别</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># python3 取消cmp</span></span><br><span class="line">sorted(iterable, key=<span class="keyword">None</span>, reverse=<span class="keyword">False</span>)  </span><br><span class="line">list.sort(self, key=<span class="keyword">None</span>, reverse=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+        <p>排序在编程中非常常见，python内置sort()和sorted()两中排序方式。<a id="more"></a></p>
+<!--more-->
+<h3 id="list-sort-sorted-区别"><a class="header-anchor" href="#list-sort-sorted-区别">¶</a>list.sort() sorted() 区别</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># python3 取消cmp</span></span><br><span class="line">sorted(iterable, key=<span class="keyword">None</span>, reverse=<span class="keyword">False</span>)  </span><br><span class="line">list.sort(self, key=<span class="keyword">None</span>, reverse=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
 <p>sort()与sorted()的不同在于，sort是在原位重新排列list， sort() 函数不需要复制原有列表，消耗的内存较少，效率也较高。</p>
 <p>sorted()是产生一个新的列表，并可以接受任何形式的可迭代对象（包括不可变序列和生成器），并返回list，因此可以满足不同需求。</p>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>参数用法大体一致</p>
-<h4 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h4><p>iterable：是可迭代类型;<br>key：用列表元素的某个属性和函数进行作为关键字，有默认值，迭代集合中的一项;</p>
+<h3 id="介绍"><a class="header-anchor" href="#介绍">¶</a>介绍</h3>
+<p>参数用法大体一致</p>
+<h4 id="sorted"><a class="header-anchor" href="#sorted">¶</a>sorted()</h4>
+<p>iterable：是可迭代类型;<br>
+key：用列表元素的某个属性和函数进行作为关键字，有默认值，迭代集合中的一项;</p>
 <p>reverse：排序规则. reverse = True 或者 reverse = False，有默认值；</p>
 <p>return：list</p>
-<h4 id="list-sort"><a href="#list-sort" class="headerlink" title="list.sort()"></a>list.sort()</h4><p>sort() 是list的内置函数通过list.sort()调用</p>
+<h4 id="list-sort"><a class="header-anchor" href="#list-sort">¶</a>list.sort()</h4>
+<p>sort() 是list的内置函数通过list.sort()调用</p>
 <p>key：用列表元素的某个属性和函数进行作为关键字，有默认值，迭代集合中的一项;</p>
-<p>reverse：排序规则. reverse = True 或者 reverse = False，有默认值。 </p>
+<p>reverse：排序规则. reverse = True 或者 reverse = False，有默认值。</p>
 <p>return：None</p>
-<h4 id="对str去重排序"><a href="#对str去重排序" class="headerlink" title="对str去重排序"></a>对str去重排序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sort()</span></span><br><span class="line">In [<span class="number">2</span>]: str=<span class="string">"cdsciolsdruikcadssv"</span></span><br><span class="line">   ...: s = list(set(str))</span><br><span class="line">   ...: s.sort(reverse=<span class="keyword">False</span>)</span><br><span class="line">   ...: print(<span class="string">""</span>.join(s))</span><br><span class="line">acdiklorsuv</span><br><span class="line"></span><br><span class="line"><span class="comment"># sorted()</span></span><br><span class="line">In [<span class="number">3</span>]: print(<span class="string">""</span>.join(sorted(set(str),reverse=<span class="keyword">False</span>)))</span><br><span class="line">acdiklorsuv</span><br></pre></td></tr></table></figure>
-<h3 id="sort-之魅"><a href="#sort-之魅" class="headerlink" title="sort 之魅"></a>sort 之魅</h3><p>给定一个只包含大小写字母，数字的字符串，对其进行排序，保证：</p>
-<p>所有的小写字母在大写字母前面<br>所有的字母在数字前面<br>所有的奇数在偶数前面</p>
+<h4 id="对str去重排序"><a class="header-anchor" href="#对str去重排序">¶</a>对str去重排序</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sort()</span></span><br><span class="line">In [<span class="number">2</span>]: str=<span class="string">"cdsciolsdruikcadssv"</span></span><br><span class="line">   ...: s = list(set(str))</span><br><span class="line">   ...: s.sort(reverse=<span class="keyword">False</span>)</span><br><span class="line">   ...: print(<span class="string">""</span>.join(s))</span><br><span class="line">acdiklorsuv</span><br><span class="line"></span><br><span class="line"><span class="comment"># sorted()</span></span><br><span class="line">In [<span class="number">3</span>]: print(<span class="string">""</span>.join(sorted(set(str),reverse=<span class="keyword">False</span>)))</span><br><span class="line">acdiklorsuv</span><br></pre></td></tr></table></figure>
+<h3 id="sort-之魅"><a class="header-anchor" href="#sort-之魅">¶</a>sort 之魅</h3>
+<p>给定一个只包含大小写字母，数字的字符串，对其进行排序，保证：</p>
+<p>所有的小写字母在大写字母前面<br>
+所有的字母在数字前面<br>
+所有的奇数在偶数前面</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">5</span>]: s = <span class="string">"Sorting1234"</span></span><br><span class="line">   ...: <span class="string">""</span>.join(sorted(s, key=<span class="keyword">lambda</span> x: (x.isdigit(), x.isdigit() <span class="keyword">and</span> int(x) % <span class="number">2</span> == <span class="number">0</span>, x.isupper(), x.islower(), x)))</span><br><span class="line">Out[<span class="number">5</span>]: <span class="string">'ginortS1324'</span></span><br></pre></td></tr></table></figure>
-<p>分析：<br>key 用来决定在排序算法中 cmp 比较的内容，key 可以是任何可被比较的内容，lambda 函数将输入的字符转换为一个元组，然后 sorted 函数将根据元组（而不是字符）来进行比较，进而判断每个字符的前后顺序。</p>
+<p>分析：<br>
+key 用来决定在排序算法中 cmp 比较的内容，key 可以是任何可被比较的内容，lambda 函数将输入的字符转换为一个元组，然后 sorted 函数将根据元组（而不是字符）来进行比较，进而判断每个字符的前后顺序。</p>
 <p>元组大小比较：将第一元组的第一项与第二元组的第一项进行比较;如果它们不相等，这是比较的结果，否则第二项被考虑，然后第三项，等等。</p>
-<h3 id="sort函数内部实现原理"><a href="#sort函数内部实现原理" class="headerlink" title="sort函数内部实现原理"></a>sort函数内部实现原理</h3><p>sort 内部通过Timsort实现，详情查看<a href="https://www.cnblogs.com/clement-jiao/p/9243066.html" target="_blank" rel="noopener">python sort函数内部实现原理</a></p>
+<h3 id="sort函数内部实现原理"><a class="header-anchor" href="#sort函数内部实现原理">¶</a>sort函数内部实现原理</h3>
+<p>sort 内部通过Timsort实现，详情查看<a href="https://www.cnblogs.com/clement-jiao/p/9243066.html" target="_blank" rel="noopener">python sort函数内部实现原理</a></p>
 
     </div>
 
@@ -345,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#list-sort-sorted-区别"><span class="nav-number">1.</span> <span class="nav-text">list.sort() sorted() 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sorted"><span class="nav-number">2.1.</span> <span class="nav-text">sorted()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list-sort"><span class="nav-number">2.2.</span> <span class="nav-text">list.sort()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对str去重排序"><span class="nav-number">2.3.</span> <span class="nav-text">对str去重排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-之魅"><span class="nav-number">3.</span> <span class="nav-text">sort 之魅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort函数内部实现原理"><span class="nav-number">4.</span> <span class="nav-text">sort函数内部实现原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#list-sort-sorted-区别"><span class="nav-number">1.</span> <span class="nav-text">¶list.sort() sorted() 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">¶介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sorted"><span class="nav-number">2.1.</span> <span class="nav-text">¶sorted()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list-sort"><span class="nav-number">2.2.</span> <span class="nav-text">¶list.sort()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对str去重排序"><span class="nav-number">2.3.</span> <span class="nav-text">¶对str去重排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-之魅"><span class="nav-number">3.</span> <span class="nav-text">¶sort 之魅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort函数内部实现原理"><span class="nav-number">4.</span> <span class="nav-text">¶sort函数内部实现原理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

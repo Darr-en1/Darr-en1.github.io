@@ -28,18 +28,18 @@
 <meta property="og:site_name" content="Darr_en1&#39;s blogs">
 <meta property="og:description" content="公司gitlab 上维护了一些Python内部库，最近出现了一些小毛病，解决的同时借此梳理一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218162310393.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218162718614.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218163758493.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220221115331230.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218171530761.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218164330516.png">
-<meta property="og:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218201207173.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218162310393.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218162718614.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218163758493.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220221115331230.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218171530761.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218164330516.png">
+<meta property="og:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218201207173.png">
 <meta property="og:updated_time" content="2022-02-22T13:45:06.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python内部库依赖管理">
 <meta name="twitter:description" content="公司gitlab 上维护了一些Python内部库，最近出现了一些小毛病，解决的同时借此梳理一下。">
-<meta name="twitter:image" content="http://yoursite.com/images/python内部库依赖管理/image-20220218162310393.png">
+<meta name="twitter:image" content="http://yoursite.com/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218162310393.png">
 
 <link rel="canonical" href="http://yoursite.com/2022/02/18/1/">
 
@@ -251,28 +251,32 @@
 
       
         <p>公司gitlab 上维护了一些Python内部库，最近出现了一些小毛病，解决的同时借此梳理一下。<a id="more"></a></p>
-<h2 id="内部库依赖正确写法"><a href="#内部库依赖正确写法" class="headerlink" title="内部库依赖正确写法"></a>内部库依赖正确写法</h2><p>公司最近对gitlab 服务进行升级，由此导致了内部库下载失败。之前在requirements.txt 声明的链接如下：</p>
-<p><img src="/images/python内部库依赖管理/image-20220218162310393.png" alt="image-20220218162310393"></p>
+<h2 id="内部库依赖正确写法"><a class="header-anchor" href="#内部库依赖正确写法">¶</a>内部库依赖正确写法</h2>
+<p>公司最近对gitlab 服务进行升级，由此导致了内部库下载失败。之前在requirements.txt 声明的链接如下：</p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218162310393.png" alt="image-20220218162310393"></p>
 <p>经排查发现gitlab 版本升级后，链接地址发生了变化，新的地址如下：</p>
-<p><img src="/images/python内部库依赖管理/image-20220218162718614.png" alt="image-20220218162718614"></p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218162718614.png" alt="image-20220218162718614"></p>
 <p>了解后发现，其实 pip 就是将 gitlab 仓库的代码以压缩文件的形式下载下来并解压执行setup 生成python 运行环境的依赖库。</p>
 <p>这么写还是直接获取tar 包的地址，适配性太差，不知道那天链接又改掉了，那么有什么好的方案吗</p>
 <p>其实git 有提供获取依赖库的接口，通过调用以下链接实现依赖库的下载：</p>
-<p><img src="/images/python内部库依赖管理/image-20220218163758493.png" alt="image-20220218163758493"></p>
-<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><p>之前公司内部依赖库是拉取某一个分支，倘若采取这种方案会出现以下两个问题：</p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218163758493.png" alt="image-20220218163758493"></p>
+<h2 id="版本管理"><a class="header-anchor" href="#版本管理">¶</a>版本管理</h2>
+<p>之前公司内部依赖库是拉取某一个分支，倘若采取这种方案会出现以下两个问题：</p>
 <ul>
 <li>当底层依赖库升级后，上层所有库都需要做适配，否则会出现无法运行的情况</li>
 <li>当部署否版本回退时，依赖无法回退至上一个版本</li>
 </ul>
 <p>因此我们采取以下方案： 基于master 打tag 进行版本控制。当新的特性更新到master ,我们会对其进行打tag，声明版本。  如(v1.0.0),因此我们只需要在</p>
 <p>业务库中修改依赖即可，如：</p>
-<p><img src="/images/python内部库依赖管理/image-20220221115331230.png" alt="image-20220221115331230"></p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220221115331230.png" alt="image-20220221115331230"></p>
 <p>而其他上层库则按需修改，也可以解决上面出现的问题。</p>
-<h2 id="other"><a href="#other" class="headerlink" title="other"></a>other</h2><p>正常情况就没啥问题了，但是本人在测试环境进行部署时，发现情况并不乐观，执行以下命令(-q 控制台详细打印输出)：</p>
-<p><img src="/images/python内部库依赖管理/image-20220218171530761.png" alt="image-20220218171530761"></p>
+<h2 id="other"><a class="header-anchor" href="#other">¶</a>other</h2>
+<p>正常情况就没啥问题了，但是本人在测试环境进行部署时，发现情况并不乐观，执行以下命令(-q 控制台详细打印输出)：</p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218171530761.png" alt="image-20220218171530761"></p>
 <p>出现错误： <code>fatal: HTTP request failed</code></p>
 <p>查阅后发现，因为当前机器Centos 版本过低，只有Cento6.5，自带的的git 版本 1.7.1 ，并不支持此格式，因此需要对git 进行升级。</p>
-<h4 id="升级git"><a href="#升级git" class="headerlink" title="升级git"></a>升级git</h4><p>1.安装依赖</p>
+<h4 id="升级git"><a class="header-anchor" href="#升级git">¶</a>升级git</h4>
+<p>1.安装依赖</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc</span><br><span class="line">sudo yum install  gcc perl-ExtUtils-MakeMaker</span><br></pre></td></tr></table></figure>
 <p>2.卸载git</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove git</span><br></pre></td></tr></table></figure>
@@ -285,18 +289,22 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "export PATH=$PATH:/usr/local/git/bin" &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>至此，git 升级完成，可以通过<code>git --version</code> 查看版本</p>
 <p>再次执行下载命令，仍旧出现错误，<code>SSL connect error</code>，只是由于无法在服务器使用curl命令访问https域名,nss版本有点旧了，这该死的老机器😭：</p>
-<p><img src="/images/python内部库依赖管理/image-20220218164330516.png" alt="image-20220218164330516"></p>
-<h4 id="更新nss"><a href="#更新nss" class="headerlink" title="更新nss"></a>更新nss</h4><p>执行更新nss命令：</p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218164330516.png" alt="image-20220218164330516"></p>
+<h4 id="更新nss"><a class="header-anchor" href="#更新nss">¶</a>更新nss</h4>
+<p>执行更新nss命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y nss curl libcurl</span><br></pre></td></tr></table></figure>
 <p>又又又出现问题啦😣<code>Cannot find a valid baseurl for repo: base</code></p>
 <p>需要更新yum 的下载源。。。。。。</p>
-<h4 id="更换yum源"><a href="#更换yum源" class="headerlink" title="更换yum源"></a>更换yum源</h4><ol>
-<li><p>备份原yum源</p>
+<h4 id="更换yum源"><a class="header-anchor" href="#更换yum源">¶</a>更换yum源</h4>
+<ol>
+<li>
+<p>备份原yum源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol start="2">
-<li><p>下载镜像源</p>
+<li>
+<p>下载镜像源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>阿里云centos7的yum源：http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"><span class="meta">#</span>阿里云centos6的yum源：http://mirrors.aliyun.com/repo/Centos-6.repo</span><br><span class="line">wget -O /etc/yum.repos.d/Centos-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -306,11 +314,13 @@
 <p>3.重新生成缓存</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>清除缓存</span><br><span class="line">yum clean all</span><br><span class="line"><span class="meta">#</span>重新生成缓存</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
 <ol start="4">
-<li><p>更新nss</p>
+<li>
+<p>更新nss</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y nss curl libcurl</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>下载依赖</p>
-<p><img src="/images/python内部库依赖管理/image-20220218201207173.png" alt="image-20220218201207173"></p>
+<li>
+<p>下载依赖</p>
+<p><img src="/images/python%E5%86%85%E9%83%A8%E5%BA%93%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/image-20220218201207173.png" alt="image-20220218201207173"></p>
 </li>
 </ol>
 <p>参考：</p>
@@ -338,7 +348,10 @@
     <a href="/2021/09/22/1/" rel="prev" title="记一次问题解决过程">
       <i class="fa fa-chevron-left"></i> 记一次问题解决过程
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/07/1/" rel="next" title="kafka docker 安装">
+      kafka docker 安装 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -397,7 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部库依赖正确写法"><span class="nav-number">1.</span> <span class="nav-text">内部库依赖正确写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本管理"><span class="nav-number">2.</span> <span class="nav-text">版本管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other"><span class="nav-number">3.</span> <span class="nav-text">other</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#升级git"><span class="nav-number">3.0.1.</span> <span class="nav-text">升级git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新nss"><span class="nav-number">3.0.2.</span> <span class="nav-text">更新nss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更换yum源"><span class="nav-number">3.0.3.</span> <span class="nav-text">更换yum源</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部库依赖正确写法"><span class="nav-number">1.</span> <span class="nav-text">¶内部库依赖正确写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本管理"><span class="nav-number">2.</span> <span class="nav-text">¶版本管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other"><span class="nav-number">3.</span> <span class="nav-text">¶other</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#升级git"><span class="nav-number">3.0.1.</span> <span class="nav-text">¶升级git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新nss"><span class="nav-number">3.0.2.</span> <span class="nav-text">¶更新nss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更换yum源"><span class="nav-number">3.0.3.</span> <span class="nav-text">¶更换yum源</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -412,7 +425,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

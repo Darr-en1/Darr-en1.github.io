@@ -258,11 +258,11 @@
 </tr>
 <tr>
 <td>FirstName</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 <tr>
 <td>LastName</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 </tbody>
 </table>
@@ -271,13 +271,13 @@
 <thead>
 <tr>
 <th>列名</th>
-<th>类型 </th>
+<th>类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AddressId</td>
-<td>int（主） </td>
+<td>int（主）</td>
 </tr>
 <tr>
 <td>PersonId</td>
@@ -285,16 +285,17 @@
 </tr>
 <tr>
 <td>City</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 <tr>
 <td>State</td>
-<td>varchar </td>
+<td>varchar</td>
 </tr>
 </tbody>
 </table>
 <p><strong>题目</strong></p>
-<p>编写一个SQL查询，满足条件：无论person是否有地址信息，都需要基于上述两表提供<br>person的以下信息：</p>
+<p>编写一个SQL查询，满足条件：无论person是否有地址信息，都需要基于上述两表提供<br>
+person的以下信息：</p>
 <p>FirstName, LastName, City, State</p>
 <p><strong>本题目考察的知识点有两点，关联查询，on where区别</strong></p>
 <p>数据库在通过连接两张或多张表来返回记录时，都会生成一张中间的临时表，然后再将这张临时表返回给用户。</p>
@@ -303,7 +304,8 @@
 <p>1.on条件是在生成临时表时使用的条件，它不管on中的条件是否为真，都会返回左边表中的记录。</p>
 <p>2.where条件是在临时表生成好后，再对临时表进行过滤的条件。这时已经没有left join的含义（必须返回左边表的记录）了，条件不为真的就全部过滤掉。</p>
 <p>3.因为inner join取并集，因此on where 没区别</p>
-<p><strong>答案</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT p.FirstName, p.LastName, a.City, a.State </span><br><span class="line">FROM Person p LEFT JOIN Address a </span><br><span class="line">ON  p.PersonId = a.personId;</span><br></pre></td></tr></table></figure></p>
+<p><strong>答案</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT p.FirstName, p.LastName, a.City, a.State </span><br><span class="line">FROM Person p LEFT JOIN Address a </span><br><span class="line">ON  p.PersonId = a.personId;</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.cnblogs.com/toSeeMyDream/p/6843984.html" target="_blank" rel="noopener">on与where区别</a></p>
 
     </div>
@@ -404,7 +406,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
