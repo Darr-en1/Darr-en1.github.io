@@ -247,29 +247,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。</p>
-<a id="more"></a>
-<h3 id="mro-发展史"><a class="header-anchor" href="#mro-发展史">¶</a>MRO 发展史</h3>
-<p><strong>二义性问题</strong>：当b1,b2都继承A时，假设A类有个f()方法都被b1,b2重写。此时c在同时继承b1,b2当调用f()方法时，就无法确定调用那个方法。</p>
+        <p>相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。<br><a id="more"></a></p>
+<h3 id="MRO-发展史"><a href="#MRO-发展史" class="headerlink" title="MRO 发展史"></a>MRO 发展史</h3><p><strong>二义性问题</strong>：当b1,b2都继承A时，假设A类有个f()方法都被b1,b2重写。此时c在同时继承b1,b2当调用f()方法时，就无法确定调用那个方法。</p>
 <p>python 为了处理二义性问题，Python采用MRO机制。在python发展过程也逐步对MRO算法进行优化。</p>
-<h4 id="before-python2-2"><a class="header-anchor" href="#before-python2-2">¶</a>before python2.2</h4>
-<p><strong>Python2.2以前的版本：经典类</strong></p>
+<h4 id="before-python2-2"><a href="#before-python2-2" class="headerlink" title="before python2.2"></a>before python2.2</h4><p><strong>Python2.2以前的版本：经典类</strong></p>
 <p><strong>MRO算法依据:DFS</strong></p>
 <p>DFS(深度优先算法)采用递归的形式，用到了栈结构，先进后出，存在一定缺陷。</p>
 <p><img src="/images/mro/1.png" alt="DFS继承"></p>
 <p>在正常继承模式下，符合预期，但是在棱形继承模式下C类即便继承D类的方法，但由于D类在DFS下先于C类，因此C类的方法永远不会被执行</p>
-<h4 id="python2-2"><a class="header-anchor" href="#python2-2">¶</a>python2.2</h4>
-<p><strong>python2.2开始引入新式类，经典类依旧采用DFS,而新式类采用BFS</strong></p>
+<h4 id="python2-2"><a href="#python2-2" class="headerlink" title="python2.2"></a>python2.2</h4><p><strong>python2.2开始引入新式类，经典类依旧采用DFS,而新式类采用BFS</strong></p>
 <p><a href="https://www.zhihu.com/question/22475395" target="_blank" rel="noopener">python新式类和经典类的区别</a></p>
 <p><img src="/images/mro/2.png" alt="BFS继承"></p>
 <p>BFS(广度优先算法)选取状态用队列的形式，先进先出，依旧存在缺陷。虽然棱形继承模式下的缺陷被解决了，但正常继承模式下显得不太常规。</p>
-<h4 id="python2-3-2-7"><a class="header-anchor" href="#python2-3-2-7">¶</a>python2.3~2.7</h4>
-<p>从python2.3开始python对新式类的MRO算法进行调整,采用C3算法。一举解决了DFS BFS 存在的局限。</p>
+<h4 id="python2-3-2-7"><a href="#python2-3-2-7" class="headerlink" title="python2.3~2.7"></a>python2.3~2.7</h4><p>从python2.3开始python对新式类的MRO算法进行调整,采用C3算法。一举解决了DFS BFS 存在的局限。</p>
 <p><img src="/images/mro/3.png" alt="C3继承"></p>
-<h4 id="after-python3"><a class="header-anchor" href="#after-python3">¶</a>after python3</h4>
-<p>python3开始,python放弃了经典类，所有的类都是新式类采用C3算法。</p>
-<h4 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h4>
-<table>
+<h4 id="after-python3"><a href="#after-python3" class="headerlink" title="after python3"></a>after python3</h4><p>python3开始,python放弃了经典类，所有的类都是新式类采用C3算法。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
 <thead>
 <tr>
 <th>python版本</th>
@@ -295,17 +288,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="c3-线性算法原理"><a class="header-anchor" href="#c3-线性算法原理">¶</a>C3 线性算法原理</h3>
-<p>我们用 C1C2⋯CN表示包含 N 个类的列表，并令<br>
-head(C1C2⋯CN)=C1<br>
-tail(C1C2⋯CN)=C2C3⋯CN<br>
-假设类 C继承自父类 B1,⋯,BNB1,⋯,BN，那么根据 C3 线性化，类 C的方法解析列表通过如下公式确定：<br>
-L[C(B1⋯BN)]=C+merge(L[B1],⋯,L[BN],B1⋯BN)</p>
-<p>该操作可以分为以下几个步骤:<br>
-1.选取 merge 中的第一个列表记为当前列表 K。<br>
-2.令 h=head(K) ，如果 h没有出现在其他任何列表的 tail 当中，那么将其加入到类 C 的线性化列表中，并将其从 merge 中所有列表中移除，之后重复步骤 2。<br>
-3.否则，设置 KK 为 merge 中的下一个列表，并重复 2 中的操作。<br>
-4.如果 merge 中所有的类都被移除，则输出类创建成功；如果不能找到下一个 h，则输出拒绝创建类 CC 并抛出异常。</p>
+<h3 id="C3-线性算法原理"><a href="#C3-线性算法原理" class="headerlink" title="C3 线性算法原理"></a>C3 线性算法原理</h3><p>我们用 C1C2⋯CN表示包含 N 个类的列表，并令<br>head(C1C2⋯CN)=C1<br>tail(C1C2⋯CN)=C2C3⋯CN<br>假设类 C继承自父类 B1,⋯,BNB1,⋯,BN，那么根据 C3 线性化，类 C的方法解析列表通过如下公式确定：<br>L[C(B1⋯BN)]=C+merge(L[B1],⋯,L[BN],B1⋯BN)</p>
+<p>该操作可以分为以下几个步骤:<br>1.选取 merge 中的第一个列表记为当前列表 K。<br>2.令 h=head(K) ，如果 h没有出现在其他任何列表的 tail 当中，那么将其加入到类 C 的线性化列表中，并将其从 merge 中所有列表中移除，之后重复步骤 2。<br>3.否则，设置 KK 为 merge 中的下一个列表，并重复 2 中的操作。<br>4.如果 merge 中所有的类都被移除，则输出类创建成功；如果不能找到下一个 h，则输出拒绝创建类 CC 并抛出异常。</p>
 <p><img src="/images/mro/4.png" alt="继承关系图"></p>
 <p>算法演算如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">L[E] = L[E(O)] </span><br><span class="line">     = E + merge(L[O],O) </span><br><span class="line">     = [E,O]</span><br><span class="line">L[D] = [D,O]</span><br><span class="line">L[F] = [F,O]</span><br><span class="line">L[B] = B + merge(L[E],L[D],E,D) </span><br><span class="line">     = B + merge([E,O],[D,O],E,D) </span><br><span class="line">     = [B,E,D,O]</span><br><span class="line">L[C] = C + merge(L[D],L[F],D,F) </span><br><span class="line">     = [C,D,F,O]</span><br><span class="line">L[A] = A + merge([B,E,D,O],[C,D,F,O],B,C) </span><br><span class="line">     = [A,B,E,C,D,F,O]</span><br></pre></td></tr></table></figure>
@@ -396,7 +380,7 @@ L[C(B1⋯BN)]=C+merge(L[B1],⋯,L[BN],B1⋯BN)</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mro-发展史"><span class="nav-number">1.</span> <span class="nav-text">¶MRO 发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#before-python2-2"><span class="nav-number">1.1.</span> <span class="nav-text">¶before python2.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python2-2"><span class="nav-number">1.2.</span> <span class="nav-text">¶python2.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python2-3-2-7"><span class="nav-number">1.3.</span> <span class="nav-text">¶python2.3~2.7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#after-python3"><span class="nav-number">1.4.</span> <span class="nav-text">¶after python3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">¶总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c3-线性算法原理"><span class="nav-number">2.</span> <span class="nav-text">¶C3 线性算法原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MRO-发展史"><span class="nav-number">1.</span> <span class="nav-text">MRO 发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#before-python2-2"><span class="nav-number">1.1.</span> <span class="nav-text">before python2.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python2-2"><span class="nav-number">1.2.</span> <span class="nav-text">python2.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python2-3-2-7"><span class="nav-number">1.3.</span> <span class="nav-text">python2.3~2.7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#after-python3"><span class="nav-number">1.4.</span> <span class="nav-text">after python3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C3-线性算法原理"><span class="nav-number">2.</span> <span class="nav-text">C3 线性算法原理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,20 +395,20 @@ L[C(B1⋯BN)]=C+merge(L[B1],⋯,L[BN],B1⋯BN)</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

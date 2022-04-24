@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-04-09T08:22:00.986Z</updated>
+  <updated>2022-04-24T14:19:11.884Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac升级踩坑实录</title>
+    <link href="http://yoursite.com/2022/04/15/1/"/>
+    <id>http://yoursite.com/2022/04/15/1/</id>
+    <published>2022-04-15T07:48:22.000Z</published>
+    <updated>2022-04-24T14:19:11.884Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨天在家看视频，嫌电脑屏幕太小，奈何没有显示屏，于是拿出自己的ipad当作副屏，可怎么都连不上，emo中下意识看到mac 的系统偏好设置里提醒我mac升级，我个人对于软件版本升级一直是非常热衷的，对新事物的接受程度也是非常高的，于是乎就将mac 进行了版本升级，但但但是呢？还真发现了一堆坑，老泪纵横呀，希望大家也能引以为戒吧！😭😭
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://yoursite.com/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="杂谈" scheme="http://yoursite.com/tags/%E6%9D%82%E8%B0%88/"/>
+    
+      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+    
+      <category term="Monterey" scheme="http://yoursite.com/tags/Monterey/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微服务</title>
+    <link href="http://yoursite.com/2022/04/09/1/"/>
+    <id>http://yoursite.com/2022/04/09/1/</id>
+    <published>2022-04-09T08:43:34.000Z</published>
+    <updated>2022-04-24T14:09:02.877Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;单体架构随着业务体量的增大，应用会变得越发复杂，即便内部模块设计的非常清晰，但也会造成可靠性降低，服务启动慢，单模块无法水平扩展，扩展性差等一系列问题，此时我们需要对其进行拆分。但是从模块直接应用内调用变更成服务之前的调用势必会照成新问题，如测试的依赖，部署的复杂度，通信的时延，如何去有效解决这些问题呢，微服务架构由此而生。
+    
+    </summary>
+    
+      <category term="架构" scheme="http://yoursite.com/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="架构" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>kafka docker 安装</title>
@@ -109,8 +157,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近的金融市场哀嚎遍野，作为一个2020年底才入市的小韭菜也可谓是被市场狠狠的上了一课。&lt;br&gt;
-但庆幸的是在投资初期就认识到股市的风险。让我对股市抱有敬畏，而不是一味贪婪，这对我之后的理财之路会带来很大的启发和帮助。
+      &lt;p&gt;最近的金融市场哀嚎遍野，作为一个2020年底才入市的小韭菜也可谓是被市场狠狠的上了一课。&lt;br&gt;但庆幸的是在投资初期就认识到股市的风险。让我对股市抱有敬畏，而不是一味贪婪，这对我之后的理财之路会带来很大的启发和帮助。
     
     </summary>
     
@@ -158,7 +205,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;InnoDB在处理更新语句的时候，并不会将数据直接更新到数据库，大量的磁盘操作势必影响数据库的性能，InnoDB是怎么做的呢？InnoDB通过引入内存组件buffer pool从而避免频繁对磁盘做随机读写操作，并引入redo log(写入日志)的机制保证了数据不丢失。采用缓存必然存在缓存不足需要进行内存淘汰,InnoDB则采取一种类似lru的内存淘汰算法。&lt;/p&gt;
+      &lt;p&gt;InnoDB在处理更新语句的时候，并不会将数据直接更新到数据库，大量的磁盘操作势必影响数据库的性能，InnoDB是怎么做的呢？InnoDB通过引入内存组件buffer pool从而避免频繁对磁盘做随机读写操作，并引入redo log(写入日志)的机制保证了数据不丢失。采用缓存必然存在缓存不足需要进行内存淘汰,InnoDB则采取一种类似lru的内存淘汰算法。&lt;br&gt;
     
     </summary>
     
@@ -236,9 +283,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;
-很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;
-接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
+      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
     
     </summary>
     
@@ -310,7 +355,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;/p&gt;
+      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;br&gt;
     
     </summary>
     
@@ -332,9 +377,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;
-如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;
-由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
+      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
     
     </summary>
     
@@ -374,9 +417,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;
-一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;
-但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
+      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
     
     </summary>
     
@@ -421,8 +462,7 @@
 &lt;ul&gt;
 &lt;li&gt;什么时候使用 middleware&lt;/li&gt;
 &lt;li&gt;middleware是怎么运作的&lt;/li&gt;
-&lt;li&gt;自定义 StackOverflowMiddleware&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;自定义 StackOverflowMiddleware
     
     </summary>
     
@@ -432,48 +472,6 @@
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sort</title>
-    <link href="http://yoursite.com/2019/05/08/1/"/>
-    <id>http://yoursite.com/2019/05/08/1/</id>
-    <published>2019-05-08T06:22:45.000Z</published>
-    <updated>2020-11-12T09:15:45.696Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;排序在编程中非常常见，python内置sort()和sorted()两中排序方式。
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="sort" scheme="http://yoursite.com/tags/sort/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python 中的下划线</title>
-    <link href="http://yoursite.com/2019/05/07/1/"/>
-    <id>http://yoursite.com/2019/05/07/1/</id>
-    <published>2019-05-07T03:30:08.000Z</published>
-    <updated>2020-11-12T09:15:45.695Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;python 作为动态语言，不同于java通过关键字修饰变量作用域，Python中，解释器通过读取单下划线和双下划线来实现不同的含义。
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
