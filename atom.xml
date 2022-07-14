@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-04-24T14:19:11.884Z</updated>
+  <updated>2022-07-14T10:29:47.074Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>go error 最佳实践</title>
+    <link href="http://yoursite.com/2022/06/10/1/"/>
+    <id>http://yoursite.com/2022/06/10/1/</id>
+    <published>2022-06-10T08:25:46.000Z</published>
+    <updated>2022-07-14T10:29:47.074Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有别于其他语言错误和异常的概念模糊，Go语言直接从语法层面提供区分错误和异常的机制。错误通常是良性的，程序中可能出现的问题，因此错误处理也被视为业务的一部分。而异常则作为意料之外的存在而出现，通常是毁灭性的，直接导致程序的崩溃。本文将从多方面维度介绍golang 的 error ，实际应用和最佳实践，相信看完这文章后，你对 golang中 error 能有一个全面的理解。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="golang" scheme="http://yoursite.com/categories/golang/"/>
+    
+    
+      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="golang" scheme="http://yoursite.com/tags/golang/"/>
+    
+      <category term="error" scheme="http://yoursite.com/tags/error/"/>
+    
+      <category term="design" scheme="http://yoursite.com/tags/design/"/>
+    
+  </entry>
   
   <entry>
     <title>mac升级踩坑实录</title>
@@ -445,33 +471,6 @@
     
       <category term="summary" scheme="http://yoursite.com/categories/summary/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>middleware</title>
-    <link href="http://yoursite.com/2019/06/13/1/"/>
-    <id>http://yoursite.com/2019/06/13/1/</id>
-    <published>2019-06-13T03:08:41.000Z</published>
-    <updated>2020-11-12T09:15:45.692Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;middleware与Django的请求/响应生命周期挂钩，middleware中定义的钩子函数可以用于全局改变Django的输入或输出。&lt;/p&gt;
-&lt;p&gt;本文将从以下几点介绍Django的middleware：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;什么时候使用 middleware&lt;/li&gt;
-&lt;li&gt;middleware是怎么运作的&lt;/li&gt;
-&lt;li&gt;自定义 StackOverflowMiddleware
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
     
   </entry>
   
