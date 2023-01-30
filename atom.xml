@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-07-14T10:29:47.074Z</updated>
+  <updated>2023-01-30T15:06:37.883Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ChatGPT很牛,我很慌</title>
+    <link href="http://yoursite.com/2023/01/05/1/"/>
+    <id>http://yoursite.com/2023/01/05/1/</id>
+    <published>2023-01-05T02:24:55.000Z</published>
+    <updated>2023-01-30T15:06:37.883Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ChatGPT最近实在太火了，甚至很多圈外的小伙伴都知道了。它非常人性化的对话模型和强大的上下文关联,甚至让我意识不到我是在同一个机器人对话，它甚至可以协助编程，让我一度怀疑可能还没等到35岁毕业就要面临被AI淘汰的尴尬囧境。ChatGPT真的神乎其神，可以取代现有岗位吗? 知己知彼，方能百战不殆，赶紧来认识认识这个强大对手。
+    
+    </summary>
+    
+      <category term="ChatGPT" scheme="http://yoursite.com/categories/ChatGPT/"/>
+    
+    
+      <category term="ChatGPT" scheme="http://yoursite.com/tags/ChatGPT/"/>
+    
+  </entry>
   
   <entry>
     <title>go error 最佳实践</title>
@@ -240,11 +260,11 @@
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
       <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
-    
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -292,11 +312,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   
@@ -453,24 +473,6 @@
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>annual_summary</title>
-    <link href="http://yoursite.com/2020/01/15/1/"/>
-    <id>http://yoursite.com/2020/01/15/1/</id>
-    <published>2020-01-15T02:30:44.000Z</published>
-    <updated>2020-11-12T09:15:45.688Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2019已悄然离去，回顾这一整年，思考良多。2019年也是正式步入社会的一年，在技术领域，在团队协作方面都有很多提升，话不多说，切入正题。
-    
-    </summary>
-    
-      <category term="summary" scheme="http://yoursite.com/categories/summary/"/>
-    
     
   </entry>
   
