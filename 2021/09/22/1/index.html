@@ -28,15 +28,15 @@
 <meta property="og:site_name" content="Darr_en1&#39;s blogs">
 <meta property="og:description" content="测试环境服务器已经挂载了多个分区，可还是出现了磁盘空间不足的警告！那就来看看到底是哪些系统资源占用过大吧。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/记一次问题解决过程/image-20210922154202452.png">
-<meta property="og:image" content="http://yoursite.com/images/记一次问题解决过程/image-20210922154347845.png">
-<meta property="og:image" content="http://yoursite.com/images/记一次问题解决过程/image-20210922154628696.png">
-<meta property="og:image" content="http://yoursite.com/images/记一次问题解决过程/image-20210922155615572.png">
+<meta property="og:image" content="http://yoursite.com/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154202452.png">
+<meta property="og:image" content="http://yoursite.com/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154347845.png">
+<meta property="og:image" content="http://yoursite.com/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154628696.png">
+<meta property="og:image" content="http://yoursite.com/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922155615572.png">
 <meta property="og:updated_time" content="2022-02-22T13:45:06.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次问题解决过程">
 <meta name="twitter:description" content="测试环境服务器已经挂载了多个分区，可还是出现了磁盘空间不足的警告！那就来看看到底是哪些系统资源占用过大吧。">
-<meta name="twitter:image" content="http://yoursite.com/images/记一次问题解决过程/image-20210922154202452.png">
+<meta name="twitter:image" content="http://yoursite.com/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154202452.png">
 
 <link rel="canonical" href="http://yoursite.com/2021/09/22/1/">
 
@@ -252,19 +252,23 @@
 
       
         <p>测试环境服务器已经挂载了多个分区，可还是出现了磁盘空间不足的警告！那就来看看到底是哪些系统资源占用过大吧。<a id="more"></a></p>
-<h4 id="查看磁盘分布"><a href="#查看磁盘分布" class="headerlink" title="查看磁盘分布"></a>查看磁盘分布</h4><p>执行<code>cat /etc/issue</code>查看系统版本：</p>
-<p><img src="/images/记一次问题解决过程/image-20210922154202452.png" alt="image-20210922154202452"></p>
+<h4 id="查看磁盘分布"><a class="header-anchor" href="#查看磁盘分布">¶</a>查看磁盘分布</h4>
+<p>执行<code>cat /etc/issue</code>查看系统版本：</p>
+<p><img src="/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154202452.png" alt="image-20210922154202452"></p>
 <p>linux中常见的有Ext2、Ext3、Ext4、Linux swap、proc、sysfs、tmpfs等，通过<code>mount</code>命名查看当前已挂载的文件系统:</p>
-<p><img src="/images/记一次问题解决过程/image-20210922154347845.png" alt="image-20210922154347845"></p>
+<p><img src="/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154347845.png" alt="image-20210922154347845"></p>
 <p>通过<code>lsblk</code>查看当前磁盘情况:</p>
-<p><img src="/images/记一次问题解决过程/image-20210922154628696.png" alt="image-20210922154628696"></p>
-<p>可以看到根目录挂载的内存空间只有20G,大部分空间集中在     <code>/data0</code>和<code>/data2</code>。咋们通<code>df -lh</code> 查看文件系统情况:</p>
-<p><img src="/images/记一次问题解决过程/image-20210922155615572.png" alt="image-20210922155615572"></p>
+<p><img src="/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922154628696.png" alt="image-20210922154628696"></p>
+<p>可以看到根目录挂载的内存空间只有20G,大部分空间集中在 	<code>/data0</code>和<code>/data2</code>。咋们通<code>df -lh</code> 查看文件系统情况:</p>
+<p><img src="/images/%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B/image-20210922155615572.png" alt="image-20210922155615572"></p>
 <p>问题找到了，根目录几乎已经占满，但是更目录的内容可不好删除，玩意删错了，极有可能导致服务运行出现问题，甚至影响整个服务器的正常运转。</p>
 <p>通过分析发现一下两点优化可以有效的减少内存占用：</p>
 <pre><code>- 迁移服务器日志文件
 - go-path迁移
-</code></pre><h4 id="依赖库迁移"><a href="#依赖库迁移" class="headerlink" title="依赖库迁移"></a>依赖库迁移</h4><h5 id="GOPATH"><a href="#GOPATH" class="headerlink" title="GOPATH"></a>GOPATH</h5><p>部门最近开始慢慢引入go作为开发语言，但是go Moules 问世之前 go的项目依赖管理并不像python 一样简单。</p>
+</code></pre>
+<h4 id="依赖库迁移"><a class="header-anchor" href="#依赖库迁移">¶</a>依赖库迁移</h4>
+<h5 id="gopath"><a class="header-anchor" href="#gopath">¶</a>GOPATH</h5>
+<p>部门最近开始慢慢引入go作为开发语言，但是go Moules 问世之前 go的项目依赖管理并不像python 一样简单。</p>
 <p>GOPATH目录下一共包含了三个子目录，分别是：</p>
 <ul>
 <li>bin：存储所编译生成的二进制文件。</li>
@@ -273,7 +277,9 @@
 </ul>
 <p>因此在使用 GOPATH 模式下，<strong>我们需要将应用代码存放在固定的<code>$GOPATH/src</code>目录下</strong>，并且如果执行<code>go get</code>来拉取外部依赖会自动下载并安装到<code>$GOPATH</code>目录下。</p>
 <p>在 GOPATH 的 <code>$GOPATH/src</code> 下进行 <code>.go</code> 文件或源代码的存储，我们可以称其为 GOPATH 的模式, GOPATH 模式下没有版本控制的概念</p>
-<h5 id="Go-Modules"><a href="#Go-Modules" class="headerlink" title="Go Modules"></a>Go Modules</h5><h6 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h6><p>Go modules 命令：</p>
+<h5 id="go-modules"><a class="header-anchor" href="#go-modules">¶</a>Go Modules</h5>
+<h6 id="go-mod"><a class="header-anchor" href="#go-mod">¶</a>go mod</h6>
+<p>Go modules 命令：</p>
 <table>
 <thead>
 <tr>
@@ -316,13 +322,15 @@
 </tr>
 </tbody>
 </table>
-<h6 id="GO111MODULE"><a href="#GO111MODULE" class="headerlink" title="GO111MODULE"></a>GO111MODULE</h6><p>Go语言提供了 GO111MODULE 这个环境变量来作为 Go modules 的开关，其允许设置以下参数：</p>
+<h6 id="go111module"><a class="header-anchor" href="#go111module">¶</a>GO111MODULE</h6>
+<p>Go语言提供了 GO111MODULE 这个环境变量来作为 Go modules 的开关，其允许设置以下参数：</p>
 <ul>
 <li>auto：只要项目包含了 go.mod 文件的话启用 Go modules，目前在 Go1.11 至 Go1.14 中仍然是默认值。</li>
 <li>on：启用 Go modules，推荐设置，将会是未来版本中的默认值。</li>
 <li>off：禁用 Go modules，不推荐设置。</li>
 </ul>
-<h6 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h6><p>GOPATH默认设置：<code>$HOME/go</code></p>
+<h6 id="迁移"><a class="header-anchor" href="#迁移">¶</a>迁移</h6>
+<p>GOPATH默认设置：<code>$HOME/go</code></p>
 <p>通过<code>du -sh $HOME/go</code>查看磁盘占用情况： 1.5G</p>
 <p>在 /data2目录下创建 go文件夹， 编辑 <code>~/.bash_profile</code> 文件，添加环境变量 :</p>
 <p><code>export GOPATH=/data2/go</code></p>
@@ -331,7 +339,8 @@
 <p>用户并没有 <code>/data2/</code>的访问权限，把 <code>/data2/go</code>目录下的所有子文件的拥有者改为lhop用户：</p>
 <p><code>chown -R lhop:lhop /data2/go</code></p>
 <p>在项目里面使用 go mod 进行以来管理</p>
-<h6 id="为每一个项目添加运行环境"><a href="#为每一个项目添加运行环境" class="headerlink" title="为每一个项目添加运行环境"></a>为每一个项目添加运行环境</h6><p>首先创建一个文件夹<code>/file</code>， 在命令行执行 <code>export GOPATH=/file</code>,当前项目中的包将会下载到<code>/file</code>下。</p>
+<h6 id="为每一个项目添加运行环境"><a class="header-anchor" href="#为每一个项目添加运行环境">¶</a>为每一个项目添加运行环境</h6>
+<p>首先创建一个文件夹<code>/file</code>， 在命令行执行 <code>export GOPATH=/file</code>,当前项目中的包将会下载到<code>/file</code>下。</p>
 <p>注：命令行的export 只作用于当前窗口</p>
 <p>参考：</p>
 <p><a href="https://segmentfault.com/a/1190000017213655" target="_blank" rel="noopener">https://segmentfault.com/a/1190000017213655</a></p>
@@ -420,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘分布"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖库迁移"><span class="nav-number">2.</span> <span class="nav-text">依赖库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GOPATH"><span class="nav-number">2.1.</span> <span class="nav-text">GOPATH</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Go-Modules"><span class="nav-number">2.2.</span> <span class="nav-text">Go Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#go-mod"><span class="nav-number">2.2.1.</span> <span class="nav-text">go mod</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#GO111MODULE"><span class="nav-number">2.2.2.</span> <span class="nav-text">GO111MODULE</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#迁移"><span class="nav-number">2.2.3.</span> <span class="nav-text">迁移</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为每一个项目添加运行环境"><span class="nav-number">2.2.4.</span> <span class="nav-text">为每一个项目添加运行环境</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘分布"><span class="nav-number">1.</span> <span class="nav-text">¶查看磁盘分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖库迁移"><span class="nav-number">2.</span> <span class="nav-text">¶依赖库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gopath"><span class="nav-number">2.1.</span> <span class="nav-text">¶GOPATH</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#go-modules"><span class="nav-number">2.2.</span> <span class="nav-text">¶Go Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#go-mod"><span class="nav-number">2.2.1.</span> <span class="nav-text">¶go mod</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#go111module"><span class="nav-number">2.2.2.</span> <span class="nav-text">¶GO111MODULE</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#迁移"><span class="nav-number">2.2.3.</span> <span class="nav-text">¶迁移</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为每一个项目添加运行环境"><span class="nav-number">2.2.4.</span> <span class="nav-text">¶为每一个项目添加运行环境</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -435,20 +444,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

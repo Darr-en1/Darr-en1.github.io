@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-01-30T15:06:37.883Z</updated>
+  <updated>2023-05-30T14:26:54.068Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>playwright流水账笔记</title>
+    <link href="http://yoursite.com/2023/05/29/1/"/>
+    <id>http://yoursite.com/2023/05/29/1/</id>
+    <published>2023-05-29T02:32:28.000Z</published>
+    <updated>2023-05-30T14:26:54.068Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在项目中引入了Playwright，这款自动化测试工具现在应该已经名声大噪了。其实早在2020年项目刚开源的时候我就接触到了，它相较于目前最常用的Selenium实在是有太多的优势了，不用为下载各种版本的WebDriver而烦恼，本身就携带网站录制功能，无需下载其他应用，而且背靠微软这么强大的后台，我真的爱不释手，这篇文章主要记录一下我个人使用的一些技巧和踩过的坑
+    
+    </summary>
+    
+      <category term="playwright" scheme="http://yoursite.com/categories/playwright/"/>
+    
+      <category term="python" scheme="http://yoursite.com/categories/playwright/python/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/categories/playwright/python/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="playwright" scheme="http://yoursite.com/tags/playwright/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="反爬" scheme="http://yoursite.com/tags/%E5%8F%8D%E7%88%AC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ChatGPT很牛,我很慌</title>
     <link href="http://yoursite.com/2023/01/05/1/"/>
     <id>http://yoursite.com/2023/01/05/1/</id>
     <published>2023-01-05T02:24:55.000Z</published>
-    <updated>2023-01-30T15:06:37.883Z</updated>
+    <updated>2023-01-30T15:10:26.347Z</updated>
     
     <summary type="html">
     
@@ -45,7 +75,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;有别于其他语言错误和异常的概念模糊，Go语言直接从语法层面提供区分错误和异常的机制。错误通常是良性的，程序中可能出现的问题，因此错误处理也被视为业务的一部分。而异常则作为意料之外的存在而出现，通常是毁灭性的，直接导致程序的崩溃。本文将从多方面维度介绍golang 的 error ，实际应用和最佳实践，相信看完这文章后，你对 golang中 error 能有一个全面的理解。&lt;br&gt;
+      &lt;p&gt;有别于其他语言错误和异常的概念模糊，Go语言直接从语法层面提供区分错误和异常的机制。错误通常是良性的，程序中可能出现的问题，因此错误处理也被视为业务的一部分。而异常则作为意料之外的存在而出现，通常是毁灭性的，直接导致程序的崩溃。本文将从多方面维度介绍golang 的 error ，实际应用和最佳实践，相信看完这文章后，你对 golang中 error 能有一个全面的理解。&lt;/p&gt;
     
     </summary>
     
@@ -203,7 +233,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近的金融市场哀嚎遍野，作为一个2020年底才入市的小韭菜也可谓是被市场狠狠的上了一课。&lt;br&gt;但庆幸的是在投资初期就认识到股市的风险。让我对股市抱有敬畏，而不是一味贪婪，这对我之后的理财之路会带来很大的启发和帮助。
+      &lt;p&gt;最近的金融市场哀嚎遍野，作为一个2020年底才入市的小韭菜也可谓是被市场狠狠的上了一课。&lt;br&gt;
+但庆幸的是在投资初期就认识到股市的风险。让我对股市抱有敬畏，而不是一味贪婪，这对我之后的理财之路会带来很大的启发和帮助。
     
     </summary>
     
@@ -251,7 +282,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;InnoDB在处理更新语句的时候，并不会将数据直接更新到数据库，大量的磁盘操作势必影响数据库的性能，InnoDB是怎么做的呢？InnoDB通过引入内存组件buffer pool从而避免频繁对磁盘做随机读写操作，并引入redo log(写入日志)的机制保证了数据不丢失。采用缓存必然存在缓存不足需要进行内存淘汰,InnoDB则采取一种类似lru的内存淘汰算法。&lt;br&gt;
+      &lt;p&gt;InnoDB在处理更新语句的时候，并不会将数据直接更新到数据库，大量的磁盘操作势必影响数据库的性能，InnoDB是怎么做的呢？InnoDB通过引入内存组件buffer pool从而避免频繁对磁盘做随机读写操作，并引入redo log(写入日志)的机制保证了数据不丢失。采用缓存必然存在缓存不足需要进行内存淘汰,InnoDB则采取一种类似lru的内存淘汰算法。&lt;/p&gt;
     
     </summary>
     
@@ -260,11 +291,11 @@
     
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
-    
       <category term="lock" scheme="http://yoursite.com/tags/lock/"/>
     
       <category term="buffer pool" scheme="http://yoursite.com/tags/buffer-pool/"/>
+    
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
       <category term="redo log" scheme="http://yoursite.com/tags/redo-log/"/>
     
@@ -312,11 +343,11 @@
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
+      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
+    
       <category term="collections" scheme="http://yoursite.com/tags/collections/"/>
     
       <category term="linked list" scheme="http://yoursite.com/tags/linked-list/"/>
-    
-      <category term="lru" scheme="http://yoursite.com/tags/lru/"/>
     
   </entry>
   
@@ -329,7 +360,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
+      &lt;p&gt;了解异步编程的同学对于gevent一定不会陌生,但大部分人对于gevent可以在不修改任何代码的前提下将原始同步代码更替成异步代码的原理知之甚少。&lt;br&gt;
+很多人很胆怯阅读源码,但通过阅读源码，你既能学习到正确的编码规范，也能学习到好的编程思路。&lt;br&gt;
+接下来我带领大家一起来揭开gevent这层神秘面纱，及借助gevent思想在项目test中的应用。
     
     </summary>
     
@@ -401,7 +434,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;br&gt;
+      &lt;p&gt;相信学过java的同学们都知道java并不支持多继承，但python中却是支持多继承的，而且像python社区中非常有名的框架中就疯狂引入多继承来扩展类的功能。python多继承基于mro算法来实现的。&lt;/p&gt;
     
     </summary>
     
@@ -423,7 +456,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
+      &lt;p&gt;当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。&lt;br&gt;
+如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。&lt;br&gt;
+由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。
     
     </summary>
     
@@ -451,28 +486,6 @@
     
     
       <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入理解python装饰器</title>
-    <link href="http://yoursite.com/2020/01/16/1/"/>
-    <id>http://yoursite.com/2020/01/16/1/</id>
-    <published>2020-01-16T08:22:49.000Z</published>
-    <updated>2020-11-12T09:15:45.691Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;装饰器在python中应用非常广泛，这种模式允许向一个现有的对象添加新的功能，同时又不改变其结构。&lt;br&gt;一直以来我都装饰器的特性是可以将被装饰的函数替换成其他函数，实现功能的扩充。&lt;br&gt;但最近阅读&amp;lt;&amp;lt;流畅的python&amp;gt;&amp;gt;的时候，才意识到其另一大特性是&lt;font color=&quot;#00ffff&quot;&gt;装饰器在加载模块是会立即执行。&lt;/font&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
     
   </entry>
   

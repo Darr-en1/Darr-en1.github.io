@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
+  <meta name="description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。 如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。 由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis引用之计数器">
 <meta property="og:url" content="http://yoursite.com/2020/04/03/1/index.html">
 <meta property="og:site_name" content="Darr_en1&#39;s blogs">
-<meta property="og:description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
+<meta property="og:description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。 如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。 由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-11-12T09:15:45.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis引用之计数器">
-<meta name="twitter:description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
+<meta name="twitter:description" content="当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。 如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。 由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。">
 
 <link rel="canonical" href="http://yoursite.com/2020/04/03/1/">
 
@@ -242,15 +242,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。<br>如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。<br>由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。<a id="more"></a></p>
-<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>我们需要记录不同时间精度下的用户点击数，首先相同精度只需存储单次，其实我们需要可以遍列表获取精度,<br>显然需要具备去重并且排序的特性。这里我们选择zset用于存储精度数据。将分值设为0，使其根据成员名进行排序。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># key：known</span></span><br><span class="line"><span class="comment"># type:zset</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">5</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">60</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">60</span>*<span class="number">60</span>:hits    <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-<p>而对于某一个精度下的点击数量的记录，我们采用hash 来进行存储，key 为时间戳可以保证唯一性，对value 进行incr ,<br>由于redis 的单线程特性，已经保证对操作的原子性。</p>
+        <p>当我们的网站上线之后,我们很多时候需要对网站浏览记录进行分析，从而做出对策。<br>
+如:我们需要对热点页面进行缓存，因此我们就需要知道页面点击数等等。<br>
+由于redis的处理命令做到线程安全，并且支持大量的读写操作，因此将计数器储存到redis里面是一个非常好的方案。<a id="more"></a></p>
+<h2 id="设计思路"><a class="header-anchor" href="#设计思路">¶</a>设计思路</h2>
+<p>我们需要记录不同时间精度下的用户点击数，首先相同精度只需存储单次，其实我们需要可以遍列表获取精度,<br>
+显然需要具备去重并且排序的特性。这里我们选择zset用于存储精度数据。将分值设为0，使其根据成员名进行排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># key：known</span></span><br><span class="line"><span class="comment"># type:zset</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">5</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">60</span>:hits    <span class="number">0</span></span><br><span class="line"><span class="number">60</span>*<span class="number">60</span>:hits    <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>而对于某一个精度下的点击数量的记录，我们采用hash 来进行存储，key 为时间戳可以保证唯一性，对value 进行incr ,<br>
+由于redis 的单线程特性，已经保证对操作的原子性。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># key: count:1:hits  </span></span><br><span class="line"><span class="comment"># type:hash</span></span><br><span class="line"></span><br><span class="line">time1    <span class="number">70</span></span><br><span class="line">time2    <span class="number">40</span></span><br><span class="line">time3    <span class="number">50</span></span><br><span class="line">time4    <span class="number">50</span></span><br></pre></td></tr></table></figure>
-<h2 id="对计数器进行更新"><a href="#对计数器进行更新" class="headerlink" title="对计数器进行更新"></a>对计数器进行更新</h2><p>通过pipeline既可以减少通信次数，还可以保证这些命令执行过程中不会插入其他命令。</p>
+<h2 id="对计数器进行更新"><a class="header-anchor" href="#对计数器进行更新">¶</a>对计数器进行更新</h2>
+<p>通过pipeline既可以减少通信次数，还可以保证这些命令执行过程中不会插入其他命令。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">PRECISION = (<span class="number">1</span>, <span class="number">5</span>, <span class="number">60</span>, <span class="number">5</span> * <span class="number">60</span>, <span class="number">60</span> * <span class="number">60</span>, <span class="number">5</span> * <span class="number">60</span> * <span class="number">60</span>, <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>,)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_counter</span><span class="params">(conn, name, count=<span class="number">1</span>, now=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param conn:    redis连接对象</span></span><br><span class="line"><span class="string">    :param name:    统计名(点击量，销量...)</span></span><br><span class="line"><span class="string">    :param count:   访问数</span></span><br><span class="line"><span class="string">    :param now:   当前时间</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    now = now <span class="keyword">or</span> time.time()</span><br><span class="line">    pipe = conn.pipeline()</span><br><span class="line">    <span class="keyword">for</span> prec <span class="keyword">in</span> PRECISION:</span><br><span class="line">        <span class="comment"># 取得当前精度的开始时间</span></span><br><span class="line">        pnow = now // prec * prec</span><br><span class="line">        hash = <span class="string">f'<span class="subst">&#123;prec&#125;</span>:<span class="subst">&#123;name&#125;</span>'</span></span><br><span class="line">        pipe.zadd(<span class="string">'known:'</span>, &#123;hash: <span class="number">0</span>&#125;)</span><br><span class="line">        pipe.hincrby(<span class="string">'count:'</span> + hash, pnow, count)</span><br><span class="line">    pipe.execute()</span><br></pre></td></tr></table></figure>
-<h3 id="获取指定精度的数据"><a href="#获取指定精度的数据" class="headerlink" title="获取指定精度的数据"></a>获取指定精度的数据</h3><p>通过获取precision精度hash 表下的所有数据，并对时间戳进行排序并格式化，展示给用户。</p>
+<h3 id="获取指定精度的数据"><a class="header-anchor" href="#获取指定精度的数据">¶</a>获取指定精度的数据</h3>
+<p>通过获取precision精度hash 表下的所有数据，并对时间戳进行排序并格式化，展示给用户。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_counter</span><span class="params">(conn, name, precision, data_format=<span class="string">"%Y-%m-%d %H:%M:%S"</span>)</span>:</span></span><br><span class="line">    hash = <span class="string">f'<span class="subst">&#123;precision&#125;</span>:<span class="subst">&#123;name&#125;</span>'</span></span><br><span class="line">    all_counter = conn.hgetall(<span class="string">'count:'</span> + hash)</span><br><span class="line">    <span class="keyword">return</span> sorted(</span><br><span class="line">        map(<span class="keyword">lambda</span> obj: (time.strftime(data_format, time.localtime(int(obj[<span class="number">0</span>]))), int(obj[<span class="number">1</span>])), all_counter.items()),</span><br><span class="line">        key=<span class="keyword">lambda</span> obj: (obj[<span class="number">0</span>], obj[<span class="number">1</span>],))</span><br></pre></td></tr></table></figure>
-<h3 id="清理旧计数器"><a href="#清理旧计数器" class="headerlink" title="清理旧计数器"></a>清理旧计数器</h3><p>在redis中，针对zset并没有对于其内部key对应的expire操作，因此需要提供一个删除解决方案。</p>
+<h3 id="清理旧计数器"><a class="header-anchor" href="#清理旧计数器">¶</a>清理旧计数器</h3>
+<p>在redis中，针对zset并没有对于其内部key对应的expire操作，因此需要提供一个删除解决方案。</p>
 <p>需要注意以下几点：</p>
 <ul>
 <li>在删除过程中，随时可能有新的计数器更新或添加进来，因此在删除计数器的时候需要使用redis事务。</li>
@@ -341,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计思路"><span class="nav-number">1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对计数器进行更新"><span class="nav-number">2.</span> <span class="nav-text">对计数器进行更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定精度的数据"><span class="nav-number">2.1.</span> <span class="nav-text">获取指定精度的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理旧计数器"><span class="nav-number">2.2.</span> <span class="nav-text">清理旧计数器</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计思路"><span class="nav-number">1.</span> <span class="nav-text">¶设计思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对计数器进行更新"><span class="nav-number">2.</span> <span class="nav-text">¶对计数器进行更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定精度的数据"><span class="nav-number">2.1.</span> <span class="nav-text">¶获取指定精度的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理旧计数器"><span class="nav-number">2.2.</span> <span class="nav-text">¶清理旧计数器</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -356,20 +365,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
